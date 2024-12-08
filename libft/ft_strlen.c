@@ -19,8 +19,8 @@ int ft_strlen(char *str){
 	return i;
 }
 
-int main(void){
-	int i = ft_strlen("teststring");
-	printf("%d", i);
-	return(1);
-}
+// int main(void){
+// 	int i = ft_strlen("teststring");
+// 	printf("%d", i);
+// 	return(1);
+// }
