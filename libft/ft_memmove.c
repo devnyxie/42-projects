@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void *memmove(void *dest, const void *src, size_t n)
+void *ft_memmove(void *dest, const void *src, size_t n)
 {	
 	//allocate an array of N size
 	unsigned char *temp_arr = malloc(n);

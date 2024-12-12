@@ -13,7 +13,7 @@
 #include <string.h>
 #include <stdio.h>
 
-char *strnstr(const char *big, const char *little, size_t len) {
+char *ft_strnstr(const char *big, const char *little, size_t len) {
     int little_len = 0;
     while (little[little_len]) {
         little_len++;
@@ -21,7 +21,7 @@ char *strnstr(const char *big, const char *little, size_t len) {
     if (little_len == 0) {
         return (char *)big;
     }
-    int i = 0;
+    size_t i = 0;
     while (big[i] && i < len) {
         int occurrences = 0;
         while (big[i + occurrences] == little[occurrences] && occurrences < little_len) {
@@ -35,17 +35,17 @@ char *strnstr(const char *big, const char *little, size_t len) {
     return NULL;
 }
 
-int main() {
-    const char *haystack = "Hello, wor ld!";
-    const char *needle = "world";
+// int main() {
+//     const char *haystack = "Hello, wor ld!";
+//     const char *needle = "world";
     
-    char *result = strnstr(haystack, needle, 12);
+//     char *result = strnstr(haystack, needle, 12);
 
-    if (result) {
-        printf("Found: %s\n", result);
-    } else {
-        printf("Not found\n");
-    }
+//     if (result) {
+//         printf("Found: %s\n", result);
+//     } else {
+//         printf("Not found\n");
+//     }
 
-    return 0;
-}
+//     return 0;
+// }

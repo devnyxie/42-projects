@@ -18,7 +18,7 @@
 #include <stdio.h>
 #include <stddef.h>
 
-size_t strlcat(char *dest, const char *src, size_t size)
+size_t ft_strlcat(char *dest, const char *src, size_t size)
 {
     char *dest_ptr = dest;
     const char *src_ptr = src;

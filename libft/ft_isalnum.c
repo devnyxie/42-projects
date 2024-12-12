@@ -1,5 +1,4 @@
-#include "ft_isalpha.h"
-#include "ft_isdigit.h"
+#include "libft.h"
 
 #include <stdio.h>
 

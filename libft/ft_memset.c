@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <stddef.h>
 
 // s = block to fill
 // c = the value to set
-void *memset(void *s, int c, size_t size){
-	unsigned char *ptr = s; 
+void *ft_memset(void *s, int c, size_t size) {
+	unsigned char *ptr = (unsigned char *)s; 
 	while(size--){
 		*ptr = (unsigned char)c;
 		ptr++;
-	}	
+	}
+	return s;
 }

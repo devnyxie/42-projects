@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
+
 void ft_bzero(void *s, size_t size){
 	unsigned char *ptr = s;
 	while(size--){

@@ -12,7 +12,7 @@
 
 #include <stddef.h> 
 
-size_t strlcpy(char *dest, const char *src, size_t size)
+size_t ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	// find size of src in order not to overlap
 	size_t src_len = 0;

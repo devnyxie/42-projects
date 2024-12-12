@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stddef.h>
 
 void *ft_calloc(size_t nmemb, size_t size)
 {
@@ -31,16 +32,16 @@ void *ft_calloc(size_t nmemb, size_t size)
 	return (void *)arr;
 }
 
-int main(void){
-	int *arr = (int *)ft_calloc(5, sizeof(int));
-	if(arr == NULL){
-		printf("Error - not allocated");
-		return(0);
-	}
-    	for (int i = 0; i < 5; i++) {
-        	printf("%d\n", arr[i]);  // Safely access each element
-    	}
+// int main(void){
+// 	int *arr = (int *)ft_calloc(5, sizeof(int));
+// 	if(arr == NULL){
+// 		printf("Error - not allocated");
+// 		return(0);
+// 	}
+//     	for (int i = 0; i < 5; i++) {
+//         	printf("%d\n", arr[i]);  // Safely access each element
+//     	}
 
-    	free(arr);  // Free allocated memory
-	return(0);
-}
+//     	free(arr);  // Free allocated memory
+// 	return(0);
+// }

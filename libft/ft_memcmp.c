@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stddef.h>
 
 int ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char *s1_ptr = (unsigned char *)s1;
-	unsigned char *s2_ptr = (unsigned char *)s2;
-	int i = 0;	
+	const unsigned char *s1_ptr = (const unsigned char *)s1;
+	const unsigned char *s2_ptr = (const unsigned char *)s2;
+	size_t i = 0;	
 
 	while(i < n){
 		if(s1_ptr[i] != s2_ptr[i]){
