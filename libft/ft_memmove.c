@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:57:20 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/07 21:37:13 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:05:54 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void *ft_memmove(void *dest, const void *src, size_t n)
-{	
-	//allocate an array of N size
-	unsigned char *temp_arr = malloc(n);
-	if (!temp_arr)
-    	return NULL;
-	//create pointers both for dest and src
-	const unsigned char *src_ptr = (const unsigned char *)src;
-	unsigned char *dest_ptr = (unsigned char *)dest;
-	//i to count moved 8 bits
-	int i = 0;
-	size_t temp_n = n;
-	while(temp_n > 0){
-		temp_arr[i] = src_ptr[i];
-		temp_n--;
-		i++;
-	}
-	//cp to dest
-	i = 0;
-	while(n > 0){
-		dest_ptr[i] = temp_arr[i];
-		n--;
-	}
-	//FREE THE GOD DAMN MEMORY
-	free(temp_arr);
-	//return the abomination
-	return dest;
+void *ft_memmove(void *dest, const void *src, size_t n) {
+    unsigned char *d = (unsigned char *)dest;
+    const unsigned char *s = (const unsigned char *)src;
+
+    if (d < s || d >= s + n) {
+        // Non-overlapping or destination is before source; copy forward
+        for (size_t i = 0; i < n; i++) {
+            d[i] = s[i];
+        }
+    } else {
+        // Overlapping regions; copy backward
+        for (size_t i = n; i > 0; i--) {
+            d[i - 1] = s[i - 1];
+        }
+    }
+    return dest;
 }
+
 /*
 int main(void){
 	char test1[] = "hello";

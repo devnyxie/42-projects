@@ -16,7 +16,7 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
         return ft_strdup("");
 
     // if start+len >= s_size, then it won't be able to
-    // copy any characters. Therefore we will create a string of s_size minus start.
+    // copy any characters. Therefore we will adjust the len to available size.
     if (start + len > s_size)
         len = s_size - start;
 

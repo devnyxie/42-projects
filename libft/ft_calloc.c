@@ -13,35 +13,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdint.h>
 
 void *ft_calloc(size_t nmemb, size_t size)
 {
-	void *arr = (unsigned int *)malloc(nmemb * size);
-	if(arr == NULL) {
-		return NULL;
-	}
-	size_t i = 0;
-	//a char in C is always one byte;
-	//therefore, in order to fill the array, no matter the type
-	//we have to cast it to unsigned char.
-	unsigned char *ptr = (unsigned char *)arr;
-	while (i < (nmemb * size)) {
-		ptr[i] = 0;
-		i++;
-	}
-	return (void *)arr;
+	if (nmemb != 0 && size > SIZE_MAX / nmemb) {
+        return NULL;  // Memory allocation would overflow
+    }
+    void *arr = malloc(nmemb * size);
+    if (arr == NULL) {
+        return NULL;
+    }
+
+    unsigned char *ptr = (unsigned char *)arr;
+    for (size_t i = 0; i < (nmemb * size); i++) {
+        ptr[i] = 0;
+    }
+
+    return arr;
 }
 
-// int main(void){
-// 	int *arr = (int *)ft_calloc(5, sizeof(int));
-// 	if(arr == NULL){
-// 		printf("Error - not allocated");
-// 		return(0);
-// 	}
-//     	for (int i = 0; i < 5; i++) {
-//         	printf("%d\n", arr[i]);  // Safely access each element
-//     	}
+int main(void){
+	int *arr = (int *)ft_calloc(5, sizeof(int));
+	if(arr == NULL){
+		printf("Error - not allocated");
+		return(0);
+	}
+    	for (int i = 0; i < 5; i++) {
+        	printf("%d\n", arr[i]);  // Safely access each element
+    	}
 
-//     	free(arr);  // Free allocated memory
-// 	return(0);
-// }
+    	free(arr);  // Free allocated memory
+	return(0);
+}

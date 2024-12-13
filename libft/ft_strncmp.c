@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 16:06:09 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/05 17:01:56 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 20:09:08 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int ft_strncmp(const char *s1, const char *s2, size_t n){
-	// const char *ptr_1 = s1;
-	// const char *ptr_2 = s2;
-	while(n && (*s1 && *s2)){
-		if(*s1 != *s2){
-			return (unsigned char)(*s1) - (unsigned char)(*s2);
-		}
-		s1++;
-		s2++;
-		n--;
-	}
-	return 0;
+int ft_strncmp(const char *s1, const char *s2, size_t n) {
+    while (n > 0) {
+        if (*s1 != *s2) {
+            return (unsigned char)*s1 - (unsigned char)*s2;
+        }
+        
+        if (*s1 == '\0') {
+            return 0;
+        }
+
+        s1++;
+        s2++;
+        n--;
+    }
+    
+    return 0;
 }
 /*
 int main(void){
