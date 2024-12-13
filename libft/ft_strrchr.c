@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:51:40 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 21:26:23 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 23:00:24 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strrchr(const char *str, int c)
 	{
 		if (*str == (char)c)
 		{
-			result = (char *)str; // up the result with the latest match
+			result = (char *)str;
 		}
 		str++;
 	}
