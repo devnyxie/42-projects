@@ -1,3 +1,4 @@
 **/*.out	
 **/*.o
 libftTester
+libft.h.gch
