@@ -6,26 +6,30 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 15:29:10 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 20:17:54 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 21:27:21 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-char *ft_strchr(const char *str, int c) {
-    while (*str != '\0') {
-        if (*str == (char)c) {
-            return (char *)str;
-        }
-        str++;
-    }
-    if (c == '\0') {
-        return (char *)str;
-    }
-    return NULL;
+char	*ft_strchr(const char *str, int c)
+{
+	while (*str != '\0')
+	{
+		if (*str == (char)c)
+		{
+			return ((char *)str);
+		}
+		str++;
+	}
+	if (c == '\0')
+	{
+		return ((char *)str);
+	}
+	return (NULL);
 }
 /*
-int main(void){
+int	main(void){
 	char *str = "Testing";
 	char *ptr = strchr(str, 's');
 	printf("%s", ptr);

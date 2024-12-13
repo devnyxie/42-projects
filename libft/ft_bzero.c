@@ -6,15 +6,19 @@
 /*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:56:53 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/03 13:58:51 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 21:26:44 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void ft_bzero(void *s, size_t size){
-	unsigned char *ptr = s;
-	while(size--){
+void	ft_bzero(void *s, size_t size)
+{
+	unsigned char	*ptr;
+
+	ptr = s;
+	while (size--)
+	{
 		*ptr = '\0';
 		ptr++;
 	}

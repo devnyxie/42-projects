@@ -6,13 +6,15 @@
 /*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:03:22 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/03 14:07:29 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 21:26:31 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_toupper(int c){
-	if(c >= 'a' && c <= 'z'){
-		return(c-32);
+int	ft_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+	{
+		return (c - 32);
 	}
-	return c;
+	return (c);
 }

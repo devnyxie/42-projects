@@ -6,13 +6,15 @@
 /*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:16:03 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/03 13:21:29 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/13 21:27:04 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isprint(int c){
-	if(c >= 32 && c <= 126){
-		return 1;
+int	ft_isprint(int c)
+{
+	if (c >= 32 && c <= 126)
+	{
+		return (1);
 	}
-	return 0;
+	return (0);
 }
