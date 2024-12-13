@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 01:08:15 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 22:46:36 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/14 01:32:20 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,47 @@
 #include <stddef.h>
 #include <stdio.h>
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t	dst_len;
+	size_t	dest_len;
 	size_t	src_len;
-	size_t	i;
+	size_t	n;
 
-	dst_len = ft_strlen(dst);
+	dest_len = ft_strlen(dest);
 	src_len = ft_strlen(src);
-	if (dstsize > dst_len)
+	if (size <= dest_len)
 	{
-		i = 0;
-		while (i < dstsize - dst_len - 1 && src[i] != '\0')
-		{
-			dst[dst_len + i] = src[i];
-			i++;
-		}
-		dst[dst_len + i] = '\0';
+		return (size + src_len);
 	}
-	return (dst_len + src_len);
+	n = size - dest_len - 1;
+	while (n-- && *src)
+	{
+		dest[dest_len++] = *src++;
+	}
+	dest[dest_len] = '\0';
+	return (dest_len + ft_strlen(src));
 }
+
+// size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+// {
+// 	size_t	dst_len;
+// 	size_t	src_len;
+// 	size_t	i;
+
+// 	dst_len = ft_strlen(dst);
+// 	src_len = ft_strlen(src);
+// 	if (dstsize > dst_len)
+// 	{
+// 		i = 0;
+// 		while (i < dstsize - dst_len - 1 && src[i] != '\0')
+// 		{
+// 			dst[dst_len + i] = src[i];
+// 			i++;
+// 		}
+// 		dst[dst_len + i] = '\0';
+// 	}
+// 	return (dst_len + src_len);
+// }
 
 /*
 int	main(void)

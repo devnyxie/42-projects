@@ -1,4 +1,5 @@
-**/*.out	
-**/*.o
+*.out	
+*.o
+*.a
 libftTester
 libft.h.gch

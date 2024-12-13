@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:57:20 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 23:02:37 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/14 01:32:37 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,27 @@
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*d;
-	const unsigned char	*s = (const unsigned char *)src;
-	size_t				i;
+	const unsigned char	*s = src;
 
-	d = (unsigned char *)dest;
-	i = 0;
-	if (d < s || d >= s + n)
+	d = dest;
+	if (d == s)
 	{
-		while (i < n)
+		return (dest);
+	}
+	if (d < s)
+	{
+		while (n--)
 		{
-			d[i] = s[i];
-			i++;
+			*d++ = *s++;
 		}
 	}
 	else
 	{
-		while (i > n)
+		d += n;
+		s += n;
+		while (n--)
 		{
-			d[i - 1] = s[i - 1];
-			i--;
+			*(--d) = *(--s);
 		}
 	}
 	return (dest);
