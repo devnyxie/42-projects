@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:18:14 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 22:58:14 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:10:49 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void			*arr;
-	unsigned char	*ptr;
+	char	*ptr;
 	size_t			i;
 
 	if (nmemb != 0 && size > SIZE_MAX / nmemb)
@@ -30,7 +30,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	{
 		return (NULL);
 	}
-	ptr = (unsigned char *)arr;
+	ptr = (char *)arr;
 	i = 0;
 	while (i < (nmemb * size))
 	{
