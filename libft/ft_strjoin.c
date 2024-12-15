@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 23:36:54 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/14 01:11:39 by tafanasi         ###   ########.fr       */
+/*   Updated: 2024/12/15 03:54:04 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// think of edge cases bro
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	unsigned int	s1_len;
