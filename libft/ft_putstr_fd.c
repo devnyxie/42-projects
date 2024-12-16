@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 20:19:14 by vpozniak          #+#    #+#             */
-/*   Updated: 2024/12/16 00:42:08 by vpozniak         ###   ########.fr       */
+/*   Created: 2024/12/16 17:09:29 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:09:30 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {

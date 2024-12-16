@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 21:18:14 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/15 19:10:49 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:06:26 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:07:32 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 
+// SIZE_MAX is the maximum value representable by an object of type size_t.
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void			*arr;

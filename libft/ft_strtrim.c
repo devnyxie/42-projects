@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 01:22:38 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/15 04:17:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:13:23 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:14:40 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
+// allocates and returns a copy of ’s1’
+// with the characters specified in ’set’ removed 
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		start;

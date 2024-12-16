@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 23:36:54 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/15 03:54:04 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:10:29 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:10:29 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)

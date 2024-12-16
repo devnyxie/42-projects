@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 16:06:09 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 21:27:37 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:11:11 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:11:26 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <stddef.h>
 
+// compare two strings up to n characters
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	while (n > 0)

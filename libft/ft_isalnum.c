@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 20:32:52 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 21:25:24 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:07:39 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:07:41 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	ft_isalnum(int c)
 {

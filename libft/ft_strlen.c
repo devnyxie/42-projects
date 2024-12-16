@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 13:28:07 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 21:26:16 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:10:55 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:21:41 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	ft_strlen(char *str)
 {

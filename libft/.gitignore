@@ -3,3 +3,4 @@
 *.a
 libftTester
 libft.h.gch
+.vscode

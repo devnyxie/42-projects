@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 22:55:09 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 22:58:43 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:13:39 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:13:39 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+// allocates and returns a substring from the string ’s’.
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	size_t	str_len;

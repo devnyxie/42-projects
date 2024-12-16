@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 21:51:57 by vpozniak          #+#    #+#             */
-/*   Updated: 2024/12/16 00:41:43 by vpozniak         ###   ########.fr       */
+/*   Created: 2024/12/16 17:09:19 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:20:24 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
+// writes the integer n to the file descriptor fd
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	num;

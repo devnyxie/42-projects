@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 03:49:57 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 21:47:34 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:11:31 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:12:13 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include <stddef.h>
 
+// find the first occurrence of the substring little in the string big
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	little_len;

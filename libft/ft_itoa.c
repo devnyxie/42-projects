@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 23:45:41 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/15 23:45:45 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:19 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:17:06 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	ft_numlen(int n, int base)
 {

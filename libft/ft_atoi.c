@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 20:00:29 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 22:34:03 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:05:48 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:16:13 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 const char	*skip_spaces(const char *str)
 {
@@ -22,7 +20,6 @@ const char	*skip_spaces(const char *str)
 	return (str);
 }
 
-// we have to return the modified pointer
 const char	*manage_pos(const char *str, int *pos)
 {
 	if (*str == '-')
@@ -38,6 +35,8 @@ const char	*manage_pos(const char *str, int *pos)
 	return (str);
 }
 
+// converts the string pointed to by str to int
+// INT_MAX is used to prevent the buffer overflow
 int	ft_atoi(const char *str)
 {
 	int	last_digit;

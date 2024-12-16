@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 13:34:16 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 21:25:58 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:47 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:18:38 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // s = block to fill
 // c = the value to set
+// size = the number of bytes to set
 void	*ft_memset(void *s, int c, size_t size)
 {
 	unsigned char	*ptr;

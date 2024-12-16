@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpozniak <vpozniak@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 20:25:12 by vpozniak          #+#    #+#             */
-/*   Updated: 2024/12/15 20:28:39 by vpozniak         ###   ########.fr       */
+/*   Created: 2024/12/16 17:09:07 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:19:30 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
+// writes the string s to the file descriptor fd followed by a newline
 void	ft_putendl_fd(char *s, int fd)
 {
 	int	i;

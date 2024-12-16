@@ -5,12 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/13 22:50:36 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/13 22:50:45 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:09:56 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:21:17 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 
 // Create a duplicate of the given string using malloc

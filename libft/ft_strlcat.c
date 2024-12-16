@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 01:08:15 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/14 01:32:20 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:10:39 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:10:39 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
-#include <stdio.h>
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

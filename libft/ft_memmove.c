@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 16:57:20 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/14 01:32:37 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:18:20 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
 
+// copies n bytes from memory area src to memory area dest
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*d;
