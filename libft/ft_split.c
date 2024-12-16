@@ -3,126 +3,93 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 18:28:51 by tafanasi          #+#    #+#             */
-/*   Updated: 2024/12/15 21:33:10 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/15 22:38:42 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/15 22:38:44 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
-char	*ft_strncpy(char *dest, const char *src, unsigned int n)
+static int	is_delim(char c, char delim)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < n && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
+	return (c == delim);
 }
 
-int	count_words(const char *s, char delimeter)
+static int	count_words(const char *str, char delim)
 {
-	size_t	count;
-	int		in_word;
+	int	count;
 
 	count = 0;
-	in_word = 0;
-	while (*s)
+	while (*str)
 	{
-		if (*s != delimeter && !in_word)
+		while (*str && is_delim(*str, delim))
+			str++;
+		if (*str)
 		{
-			in_word = 1;
 			count++;
+			while (*str && !is_delim(*str, delim))
+				str++;
 		}
-		else
-		{
-			in_word = 0;
-		}
-		s++;
 	}
 	return (count);
 }
 
-char	*allocate_word(const char *start, size_t length)
+static char	*alloc_word(const char *str, char delim)
 {
+	int		len;
 	char	*word;
+	int		i;
 
-	word = (char *)malloc((length + 1) * sizeof(char));
+	len = 0;
+	i = 0;
+	while (str[len] && !is_delim(str[len], delim))
+		len++;
+	word = (char *)malloc((len + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
-	ft_strncpy(word, start, length);
-	word[length] = '\0';
+	while (i < len)
+	{
+		word[i] = str[i];
+		i++;
+	}
+	word[len] = '\0';
 	return (word);
 }
 
-char	**ft_split(const char *s, char delimeter)
+static void	free_all(char **result, int i)
 {
-	size_t	word_count;
-	char	**result;
-	size_t	index;
-			const char *start = s;
-	size_t	length;
-
-	if (!s)
-		return (NULL);
-	word_count = count_words(s, delimeter);
-	result = (char **)malloc((word_count + 1) * sizeof(char));
-	index = 0;
-	while (*s)
-	{
-		if (*s != delimeter)
-		{
-			length = 0;
-			while (*s && *s != delimeter)
-			{
-				s++;
-				length++;
-			}
-			result[index] = allocate_word(start, length);
-			if (!result)
-			{
-				// free ALL prev memory and return (NULL);
-				while (index > 0)
-				{
-					free(result[--index]);
-				}
-				free(result);
-				return (NULL);
-			}
-			index++;
-		} else {
-			s++;
-		}
-	}
-	result[index] = NULL;
-	return (result);
+	while (i >= 0)
+		free(result[i--]);
+	free(result);
 }
 
-int	main(void)
+char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	int		i;
 
-	result = ft_split("helloXworldXkiddosX", 'X');
-	if (!result)
-		printf("result is NULL");
 	i = 0;
-	while (result[i] != NULL)
+	if (!s)
+		return (NULL);
+	result = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	while (*s)
 	{
-		printf("%s\n", result[i]);
-		i++;
+		while (*s && is_delim(*s, c))
+			s++;
+		if (*s)
+		{
+			result[i] = alloc_word(s, c);
+			if (!result[i])
+				return (free_all(result, i - 1), NULL);
+			i++;
+			while (*s && !is_delim(*s, c))
+				s++;
+		}
 	}
-	return (0);
+	result[i] = NULL;
+	return (result);
 }
