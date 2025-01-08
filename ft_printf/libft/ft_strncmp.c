@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:11:11 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:11:26 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
 
-// copies n bytes from memory area src to memory area dest
-void	*ft_memmove(void *dest, const void *src, size_t n)
+// compare two strings up to n characters
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
-
-	d = dest;
-	s = src;
-	if (d == s)
-		return (dest);
-
-	if (d < s)
+	while (n > 0)
 	{
-		while (n--)
-			*d++ = *s++;
+		if (*s1 != *s2)
+		{
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		}
+		if (*s1 == '\0')
+		{
+			return (0);
+		}
+		s1++;
+		s2++;
+		n--;
 	}
-	else
-	{
-		d = d + n;
-		s = s + n;
-		while (n--)
-			*(--d) = *(--s);
-	}
-	return (dest);
+	return (0);
 }
+/*
+int	main(void){
+	char *str1 = "hello1";
+	char *str2 = "h2llo2";
+	int res = ft_strncmp(str1, str2, 2);
+	printf("\n%d\n", res);
+	return(0);
+}
+*/

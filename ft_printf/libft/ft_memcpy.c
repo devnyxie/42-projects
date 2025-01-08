@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:36 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:08:36 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
 
-// copies n bytes from memory area src to memory area dest
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	size_t				i;
+	const unsigned char	*src_ptr = (const unsigned char *)src;
+	unsigned char		*dest_ptr;
 
-	d = dest;
-	s = src;
-	if (d == s)
-		return (dest);
-
-	if (d < s)
+	i = 0;
+	dest_ptr = (unsigned char *)dest;
+	while (i < n)
 	{
-		while (n--)
-			*d++ = *s++;
-	}
-	else
-	{
-		d = d + n;
-		s = s + n;
-		while (n--)
-			*(--d) = *(--s);
+		dest_ptr[i] = src_ptr[i];
+		i++;
 	}
 	return (dest);
 }

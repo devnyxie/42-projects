@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:01 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:08:02 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
-
-// copies n bytes from memory area src to memory area dest
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_isascii(int c)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
-
-	d = dest;
-	s = src;
-	if (d == s)
-		return (dest);
-
-	if (d < s)
+	if (c >= 0 && c <= 127)
 	{
-		while (n--)
-			*d++ = *s++;
+		return (1);
 	}
-	else
-	{
-		d = d + n;
-		s = s + n;
-		while (n--)
-			*(--d) = *(--s);
-	}
-	return (dest);
+	return (0);
 }

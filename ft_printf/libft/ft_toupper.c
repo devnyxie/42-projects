@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:14:00 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:14:00 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdio.h>
-
-// copies n bytes from memory area src to memory area dest
-void	*ft_memmove(void *dest, const void *src, size_t n)
+int	ft_toupper(int c)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
-
-	d = dest;
-	s = src;
-	if (d == s)
-		return (dest);
-
-	if (d < s)
+	if (c >= 'a' && c <= 'z')
 	{
-		while (n--)
-			*d++ = *s++;
+		return (c - 32);
 	}
-	else
-	{
-		d = d + n;
-		s = s + n;
-		while (n--)
-			*(--d) = *(--s);
-	}
-	return (dest);
+	return (c);
 }

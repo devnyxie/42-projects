@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:12:23 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:12:39 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdio.h>
 
-// copies n bytes from memory area src to memory area dest
-void	*ft_memmove(void *dest, const void *src, size_t n)
+// find the last occurrence of the character c in the string str
+char	*ft_strrchr(const char *str, int c)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	char	*result;
 
-	d = dest;
-	s = src;
-	if (d == s)
-		return (dest);
-
-	if (d < s)
+	result = NULL;
+	while (*str != '\0')
 	{
-		while (n--)
-			*d++ = *s++;
+		if (*str == (char)c)
+		{
+			result = (char *)str;
+		}
+		str++;
 	}
-	else
+	if (c == '\0')
 	{
-		d = d + n;
-		s = s + n;
-		while (n--)
-			*(--d) = *(--s);
+		return ((char *)str);
 	}
-	return (dest);
+	return (result);
 }
+/*
+int	main(void){
+	char *str = "Testingsussy";
+	char *ptr = ft_strrchr(str, 's');
+	printf("%s", ptr);
+	return(0);
+}
+*/

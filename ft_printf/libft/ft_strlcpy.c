@@ -1,40 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:10:44 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:10:45 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stddef.h>
-#include <stdio.h>
 
-// copies n bytes from memory area src to memory area dest
-void	*ft_memmove(void *dest, const void *src, size_t n)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
+	size_t	i;
 
-	d = dest;
-	s = src;
-	if (d == s)
-		return (dest);
-
-	if (d < s)
+	i = 0;
+	if (size == 0)
 	{
-		while (n--)
-			*d++ = *s++;
+		return (ft_strlen(src));
 	}
-	else
+	while (src[i] != '\0' && i < size - 1)
 	{
-		d = d + n;
-		s = s + n;
-		while (n--)
-			*(--d) = *(--s);
+		dest[i] = src[i];
+		i++;
 	}
-	return (dest);
+	dest[i] = '\0';
+	while (src[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
