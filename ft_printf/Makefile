@@ -37,12 +37,13 @@ SRC = ft_printf.c \
 	  $(LIBFT_DIR)/ft_substr.c
 
 OBJ = $(SRC:.c=.o)
-NAME = ft_printf
+NAME = libftprintf.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	cp $(LIBFT) $(NAME)
+	ar rcs $(NAME) $(OBJ)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)

@@ -1,3 +1,2 @@
-- rework ft_printf return type from void to int
 - recode everything in vim
 - page about Makefile(s)

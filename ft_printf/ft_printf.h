@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char *ft_itoa(int n);
-char *ft_itoa_base(unsigned long value, char *base);
-void ft_putstr_fd(char *s, int fd);
-void ft_printf(char *str, ...);
+int ft_printf(const char *str, ...);
 
 #endif

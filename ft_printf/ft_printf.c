@@ -1,82 +1,176 @@
 
-#include <unistd.h>
 #include <stdarg.h>
+#include <stdint.h>
 #include <stdlib.h>
-#include "libft.h"
+#include <unistd.h>
 
-char *ft_itoa_base(unsigned long value, char *base) {
-    char *str;
-    unsigned long tmp;
-    int base_len;
-    int len;
+int	ft_putstr(char *s)
+{
+	int	i;
 
-    base_len = 0;
-    while (base[base_len])
-        base_len++;
-    if (base_len < 2)
-        return (NULL);
-    tmp = value;
-    len = 1;
-    while (tmp /= base_len)
-        len++;
-    if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
-        return (NULL);
-    str[len] = '\0';
-    while (len--) {
-        str[len] = base[value % base_len];
-        value /= base_len;
-    }
-    return (str);
+	i = 0;
+	while (s[i])
+		write(1, &s[i++], 1);
+	return (i);
 }
 
-void ft_printf(char *str, ...){
-    va_list args;
-    va_start(args, str);
+// int	ft_putnbr_base(unsigned long value, char *base)
+// {
+// 	int	base_len;
+// 	int	len;
 
-    // ft_putstr_fd(NULL, 1); FAILS
+// 	base_len = 0;
+// 	len = 0;
+// 	while (base[base_len])
+// 		base_len++;
+// 	if (base_len < 2)
+// 		return (0);
+// 	if (value >= (unsigned long)base_len)
+// 		len += ft_putnbr_base(value / base_len, base);
+// 	write(1, &base[value % base_len], 1);
+// 	return (len + 1);
+// }
 
-    while(*str){
-        // print args
-        if(*str == '%'){
-            str++;
-        if (*str == 'c') {
-            char c = va_arg(args, int);
-            write(1, &c, 1);
-        } else if (*str == 's') {
-            char *s = va_arg(args, char *);
-            ft_putstr_fd(s, 1);
-        } else if (*str == 'p') {
-            ft_putstr_fd("0x", 1);
-            ft_putstr_fd(ft_itoa_base(va_arg(args, unsigned long), "0123456789abcdef"), 1);
-        } else if (*str == 'd' || *str == 'i') {
-            ft_putstr_fd(ft_itoa(va_arg(args, int)), 1);
-        } else if (*str == 'u') {
-            ft_putstr_fd(ft_itoa(va_arg(args, unsigned int)), 1);
-        } else if (*str == 'x') {
-            ft_putstr_fd(ft_itoa_base(va_arg(args, unsigned int), "0123456789abcdef"), 1);
-        } else if (*str == 'X') {
-            ft_putstr_fd(ft_itoa_base(va_arg(args, unsigned int), "0123456789ABCDEF"), 1);
-        } else if (*str == '%') {
-            write(1, "%", 1);
-        }
-        } else {
-            // print all other characters
-            write(1, str, 1);
-        }
-        str++;
-    }
-    va_end(args);
-    return;
+// base 1 = 0123456789
+// base 2 = 0123456789abcdef
+// int	ft_putnbr_base(unsigned long value, char *base)
+// {
+// 	int	base_len;
+// 	int	len;
+
+// 	base_len = 0;
+// 	len = 0;
+// 	while (base[base_len])
+// 		base_len++;
+// 	if (value >= (unsigned long)base_len)
+// 		len += ft_putnbr_base(value / base_len, base);
+// 	write(1, &base[value % base_len], 1);
+// 	return (len + 1);
+// }
+
+int	ft_putnbr_base(unsigned long value, int base_type)
+{
+	char	*base;
+	int		base_len;
+	int		len;
+
+	if (base_type == 1)
+	{
+		base = "0123456789";
+	}
+	else if (base_type == 2)
+	{
+		base = "0123456789abcdef";
+	}
+	else if (base_type == 3)
+	{
+		base = "0123456789ABCDEF";
+	}
+	base_len = 0;
+	len = 0;
+	while (base[base_len])
+		base_len++;
+	if (value >= (unsigned long)base_len)
+		len += ft_putnbr_base(value / base_len, base_type);
+	write(1, &base[value % base_len], 1);
+	return (len + 1);
 }
 
-int main() {
-    // Test cases for ft_printf
-    ft_printf("Hello, World!\n");
-    ft_printf("Integer: %d\n", -42);
-    ft_printf("String: %s\n", "Test string");
-    ft_printf("Character: %c\n", 'A');
-    ft_printf("Hexadecimal: %x\nHexadecimal: %x\n", 255, 112);
-    ft_printf("Pointer: %p\n", (void*)main);
+int	ft_printf(const char *str, ...)
+{
+	va_list	args;
+	char	c;
+	int		len;
 
-    return 0;
+	va_start(args, str);
+	len = 0;
+	while (*str)
+	{
+		if (*str == '%')
+		{
+			str++;
+			if(*str == '\0')
+				break;
+			if (*str == 'c')
+			{
+				c = va_arg(args, int);
+				len += write(1, &c, 1);
+			}
+			else if (*str == 's')
+			{
+				char *s = va_arg(args, char *);
+				if (s == NULL) // If the string is NULL, print "(null)"
+					len += write(1, "(null)", 6);
+				else
+					len += ft_putstr(s);
+			}
+			else if (*str == 'p')
+			{
+				len += ft_putstr("0x");
+				len += ft_putnbr_base(va_arg(args, unsigned long), 2);
+			}
+			else if (*str == 'd' || *str == 'i')
+				len += ft_putnbr_base(va_arg(args, int), 1);
+			else if (*str == 'u')
+				len += ft_putnbr_base(va_arg(args, unsigned int), 1);
+			else if (*str == 'x')
+				len += ft_putnbr_base(va_arg(args, unsigned int), 2);
+			else if (*str == 'X')
+				len += ft_putnbr_base(va_arg(args, unsigned int), 3);
+			else if (*str == '%')
+				len += write(1, "%", 1);
+		}
+		else
+			len += write(1, str, 1);
+		str++;
+	}
+	va_end(args);
+	return (len);
 }
+
+// int	ft_printf(const char *str, ...)
+// {
+// 	va_list	args;
+// 	char	c;
+// 	int		len;
+
+// 	va_start(args, str);
+// 	len = 0;
+// 	while (*str)
+// 	{
+// 		if (*str == '%')
+// 		{
+// 			str++;
+// 			if (*str == 'c')
+// 			{
+// 				c = va_arg(args, int);
+// 				len += write(1, &c, 1);
+// 			}
+// 			else if (*str == 's')
+// 				len += ft_putstr(va_arg(args, char *));
+// 			else if (*str == 'p')
+// 			{
+// 				len += ft_putstr("0x");
+// 				len += ft_putnbr_base(va_arg(args, unsigned long),
+// 						"0123456789abcdef");
+// 			}
+// 			else if (*str == 'd' || *str == 'i')
+// 				len += ft_putnbr_base(va_arg(args, int), "0123456789");
+// 			else if (*str == 'u')
+// 				len += ft_putnbr_base(va_arg(args, unsigned int), "0123456789");
+// 			else if (*str == 'x')
+// 				len += ft_putnbr_base(va_arg(args, unsigned int),
+// 						"0123456789abcdef");
+// 			else if (*str == 'X')
+// 				len += ft_putnbr_base(va_arg(args, unsigned int),
+// 						"0123456789ABCDEF");
+// 			else if (*str == '%')
+// 				len += write(1, "%", 1);
+// 		}
+// 		else
+// 			len += write(1, str, 1);
+// 		str++;
+// 	}
+// 	va_end(args);
+// 	return (len);
+// }
