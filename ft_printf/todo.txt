@@ -1,2 +1,0 @@
-- recode everything in vim
-- page about Makefile(s)
