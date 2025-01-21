@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,7 +17,13 @@ int main(void)
     else{
         printf("\nFile %s opened sucessfully!\n", fileName);
     }
-    char *line = get_next_line(fd);
-    printf("\nLine: %s\n", line);
+    char *line;
+    while ((line = get_next_line(fd)) != NULL) {
+        printf("line: %s\n", line);
+        free(line);
+    }
+    // printf("\nLine: --> %s <--\n", line);
+	free(line);
+	close(fd);
     return(0);
 }

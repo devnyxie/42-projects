@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 04:02:48 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/10 04:47:20 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/01/11 06:28:58 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
-// #include "libft.h"
 
 int ft_printf(const char *str, ...);
 void ft_handle_specifiers(char current_char, int *len, va_list args);
