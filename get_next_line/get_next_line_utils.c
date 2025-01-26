@@ -1,5 +1,16 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 16:13:27 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/01/26 16:13:30 by tafanasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "get_next_line.h"
 
 char *ft_strchr(const char *s, int c)
 {
@@ -11,7 +22,6 @@ char *ft_strchr(const char *s, int c)
     }
     return (NULL);
 }
-
 
 size_t ft_strlen(const char *s)
 {

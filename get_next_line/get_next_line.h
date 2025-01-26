@@ -1,12 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/26 16:13:35 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/01/26 16:13:46 by tafanasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 #   define GET_NEXT_LINE_H
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 8
-#endif
-
-#ifndef FD_SIZE
-#   define FD_SIZE 1024
 #endif
 
 // malloc, size_t etc
