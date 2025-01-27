@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 21:03:04 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/27 01:01:12 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/01/27 01:05:05 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	*extract_line(char **storage)
 
 	if (!is_valid_storage(storage))
 		return (NULL);
-	newline_index = enter_index(*storage);
+	newline_index = find_eol(*storage);
 	if (newline_index >= 0)
 	{
 		line = ft_strdup(*storage);
