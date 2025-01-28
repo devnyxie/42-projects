@@ -6,11 +6,21 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:13:27 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/26 16:13:30 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:46:36 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char *clear_buffer(struct Buffer *buf)
+{
+    free(buf->data);
+    buf->data = NULL;
+    buf->capacity = 0;
+    buf->start = 0;
+    buf->end = 0;
+    return NULL;
+}
 
 char *ft_strchr(const char *s, int c)
 {
@@ -33,33 +43,6 @@ size_t ft_strlen(const char *s)
     while (s[len])
         len++;
     return (len);
-}
-
-void *ft_memmove(void *dest, const void *src, size_t n)
-{
-    unsigned char *d;
-    const unsigned char *s;
-
-    if (!dest && !src)
-        return (NULL);
-
-    d = (unsigned char *)dest;
-    s = (const unsigned char *)src;
-
-    if (d < s)
-    {
-        while (n--)
-            *d++ = *s++;
-    }
-    else if (d > s)
-    {
-        d += n - 1;
-        s += n - 1;
-        while (n--)
-            *d-- = *s--;
-    }
-
-    return (dest);
 }
 
 void    *ft_memcpy(void *dest, const void *src, size_t n)
