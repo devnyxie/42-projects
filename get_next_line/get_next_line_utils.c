@@ -6,89 +6,60 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:13:27 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/27 01:01:25 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:02:03 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	find_eol(const char *s)
+char	*clear_buffer(struct s_buffer *buf)
 {
-	int	i;
-
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-		{
-			if (s[i] == '\n')
-				return (i);
-			i++;
-		}
-	}
-	return (-1);
+	free(buf->data);
+	buf->data = NULL;
+	buf->capacity = 0;
+	buf->start = 0;
+	buf->end = 0;
+	return (NULL);
 }
 
-size_t	ft_strlen(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
+	while (*s != '\0')
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	return (NULL);
+}
 
-	if (!str)
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	if (!s)
 		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	while (s[len])
+		len++;
+	return (len);
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned char		*v_dest;
-	const unsigned char	*v_src;
+	unsigned char		*d;
+	const unsigned char	*s;
 	size_t				i;
 
-	if (n == 0 || (!dest && !src))
-		return (dest);
-	v_dest = (unsigned char *)dest;
-	v_src = (const unsigned char *)src;
+	if (!dest && !src)
+		return (NULL);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
 	i = 0;
 	while (i < n)
 	{
-		v_dest[i] = v_src[i];
+		d[i] = s[i];
 		i++;
 	}
 	return (dest);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*result;
-
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	result = (char *)malloc(s1_len + s2_len + 1);
-	if (!result)
-		return (NULL);
-	ft_memcpy(result, s1, s1_len);
-	ft_memcpy(result + s1_len, s2, s2_len + 1);
-	return (result);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*v_s;
-	size_t	len;
-
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s) + 1;
-	v_s = (char *)malloc(len);
-	if (!v_s)
-		return (NULL);
-	ft_memcpy(v_s, s, len);
-	return (v_s);
 }

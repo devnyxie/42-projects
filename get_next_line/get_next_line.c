@@ -5,110 +5,117 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/26 21:03:04 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/27 01:05:05 by tafanasi         ###   ########.fr       */
+/*   Created: 2025/01/28 16:45:32 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/01/28 17:04:04 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 50
-#endif
-#define MAX_FD 1024
+#define BUFFER_GROWTH_FACTOR 2
 
-// check if the bytes read are valid; free memory on error
-static int	is_valid_read_bytes(ssize_t read_bytes, char *read_chunk,
-		char *storage)
-{
-	if (read_bytes < 0)
-	{
-		free(read_chunk);
-		free(storage);
-		return (0);
-	}
-	return (1);
-}
-
-// check if the storage is valid and non-empty
-static int	is_valid_storage(char **storage)
-{
-	if (!*storage || **storage == '\0')
-	{
-		free(*storage);
-		*storage = NULL;
-		return (0);
-	}
-	return (1);
-}
-
-// read from fd and store data in storage
-static char	*read_file_and_store_storage(int fd, char **storage)
-{
-	char	*read_chunk;
-	char	*joined_data;
-	ssize_t	read_bytes;
-
-	if (!storage[fd])
-		storage[fd] = ft_strdup("");
-	read_chunk = (char *)malloc(BUFFER_SIZE + 1);
-	if (!read_chunk)
-		return (NULL);
-	while (find_eol(storage[fd]) == -1)
-	{
-		read_bytes = read(fd, read_chunk, BUFFER_SIZE);
-		if (!is_valid_read_bytes(read_bytes, read_chunk, storage[fd]))
-			return (NULL);
-		if (read_bytes == 0)
-			break ;
-		read_chunk[read_bytes] = '\0';
-		joined_data = ft_strjoin(storage[fd], read_chunk);
-		free(storage[fd]);
-		if (!joined_data)
-			return (NULL);
-		storage[fd] = joined_data;
-	}
-	free(read_chunk);
-	return (storage[fd]);
-}
-
-// extract the next line from storage
-static char	*extract_line(char **storage)
-{
-	char	*line;
-	char	*new_storage;
-	int		newline_index;
-
-	if (!is_valid_storage(storage))
-		return (NULL);
-	newline_index = find_eol(*storage);
-	if (newline_index >= 0)
-	{
-		line = ft_strdup(*storage);
-		new_storage = ft_strdup(&(*storage)[newline_index + 1]);
-		if (!line || !new_storage)
-		{
-			free(*storage);
-			return (NULL);
-		}
-		line[newline_index + 1] = '\0';
-		free(*storage);
-		*storage = new_storage;
-		return (line);
-	}
-	line = ft_strdup(*storage);
-	free(*storage);
-	*storage = NULL;
-	return (line);
-}
+int		ensure_buffer_capacity(size_t needed_size, struct s_buffer *buf);
+int		reallocate_buffer(struct s_buffer *buf);
+char	*handle_new_line(char *new_line, struct s_buffer *buf);
+char	*handle_read_zero(struct s_buffer *buf);
 
 char	*get_next_line(int fd)
 {
-	static char	*storage[MAX_FD];
+	static struct s_buffer	buf = {NULL, 0, 0, 0};
+	int						bytes_read;
+	char					*new_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FD)
+	bytes_read = 0;
+	if (fd < 0)
+	{
 		return (NULL);
-	if (!read_file_and_store_storage(fd, storage))
-		return (NULL);
-	return (extract_line(&storage[fd]));
+	}
+	while (1)
+	{
+		if (ensure_buffer_capacity(buf.end + BUFFER_SIZE + 1, &buf) < 0)
+			return (NULL);
+		bytes_read = read(fd, buf.data + buf.end, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (clear_buffer(&buf));
+		buf.end = buf.end + bytes_read;
+		buf.data[buf.end] = '\0';
+		new_line = ft_strchr(buf.data + buf.start, '\n');
+		if (new_line)
+			return (handle_new_line(new_line, &buf));
+		if (bytes_read == 0)
+			return (handle_read_zero(&buf));
+	}
+}
+
+int	ensure_buffer_capacity(size_t needed_size, struct s_buffer *buf)
+{
+	if (!buf->data || buf->capacity < needed_size)
+	{
+		return (reallocate_buffer(buf));
+	}
+	else
+	{
+		return (0);
+	}
+}
+
+int	reallocate_buffer(struct s_buffer *buf)
+{
+	char	*tmp;
+	size_t	new_capacity;
+
+	new_capacity = 0;
+	if (buf->capacity == 0)
+	{
+		new_capacity = BUFFER_SIZE * 4;
+	}
+	else
+	{
+		new_capacity = buf->capacity * BUFFER_GROWTH_FACTOR;
+	}
+	tmp = malloc(new_capacity + 1);
+	if (!tmp)
+		return (-1);
+	if (buf->data)
+	{
+		ft_memcpy(tmp, buf->data + buf->start, buf->end - buf->start);
+		free(buf->data);
+	}
+	buf->data = tmp;
+	buf->end = buf->end - buf->start;
+	buf->start = 0;
+	buf->capacity = new_capacity;
+	return (0);
+}
+
+char	*handle_new_line(char *new_line, struct s_buffer *buf)
+{
+	size_t	result_len;
+	char	*tmp;
+
+	result_len = new_line - (buf->data + buf->start) + 1;
+	tmp = malloc(result_len + 1);
+	if (!tmp)
+		return (clear_buffer(buf));
+	ft_memcpy(tmp, buf->data + buf->start, result_len);
+	tmp[result_len] = '\0';
+	buf->start += result_len;
+	return (tmp);
+}
+
+char	*handle_read_zero(struct s_buffer *buf)
+{
+	size_t	remain;
+	char	*tmp;
+
+	if (buf->start >= buf->end)
+		return (clear_buffer(buf));
+	remain = buf->end - buf->start;
+	tmp = malloc(remain + 1);
+	if (!tmp)
+		return (clear_buffer(buf));
+	ft_memcpy(tmp, buf->data + buf->start, remain);
+	tmp[remain] = '\0';
+	buf->start += remain;
+	return (tmp);
 }
