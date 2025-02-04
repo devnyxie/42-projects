@@ -27,7 +27,7 @@ char** make_area(char** zone, t_point size)
 
 int main(void)
 {
-	t_point size = {8, 5};
+	t_point size = {8, 5}; // 1-based
 	char *zone[] = {
 		"11111111",
 		"10001001",
@@ -41,7 +41,7 @@ int main(void)
 		printf("%s\n", area[i]);
 	printf("\n");
 
-	t_point begin = {7, 4};
+	t_point begin = {7, 4}; // 0-based
 	flood_fill(area, size, begin);
 	for (int i = 0; i < size.y; ++i)
 		printf("%s\n", area[i]);
