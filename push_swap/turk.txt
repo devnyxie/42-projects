@@ -1,0 +1,10 @@
+ - Find the most efficient element to move to stack B
+ - Perform the operation to get that element to the top of stack A
+ - Push it to stack B
+ - Repeat until stack A is sorted or has very few elements
+ - Sort any remaining elements in stack A
+ - Push elements from stack B back to stack A in the correct order
+
+ in order to push in the right position and keep stack B sorted in descending order, we should:
+ - rotate B as many times as needed in order to insert using push() in the right position.
+ This way the stack stays "almost sorted", often few rotations away from the perfectly sorted set.
