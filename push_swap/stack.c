@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 
 typedef struct s_node
 {
@@ -21,28 +22,6 @@ typedef struct s_ps
 	Stack *a;
 	Stack *b;
 } Set;
-
-// === UTILS ===
-void print_stack(Node *top) {
-    if (!top) {
-        printf("Stack is empty\n");
-        printf("------------------\n");
-        return;
-    }
-
-    printf("Stack Top\n");
-    printf("------------------\n");
-    
-    Node *current = top;
-    while (current) {
-        printf("│ %d\n", current->value);
-        printf("│ ↓\n");
-        current = current->next;
-    }
-    
-    printf("------------------\n");
-    printf("Stack Bottom\n");
-}
 
 // === STRUCT INIT ===
 Set *init_set(void) {
@@ -93,7 +72,58 @@ void free_set(Set *set){
 	}
 }
 
-// === STACK INNER OPERATIONS ===
+
+// === UTILS ===
+void print_stack(Node *top) {
+    if (!top) {
+        printf("Stack is empty\n");
+        printf("------------------\n");
+        return;
+    }
+
+    printf("Stack Top\n");
+    printf("------------------\n");
+    
+    Node *current = top;
+    while (current) {
+        printf("│ %d\n", current->value);
+        printf("│ ↓\n");
+        current = current->next;
+    }
+    
+    printf("------------------\n");
+    printf("Stack Bottom\n");
+}
+
+void error(Set *set){
+    printf("Error\n");
+    free_set(set);
+    exit(1);
+}
+
+// modified atoi
+int ft_atoi(const char *str, Set *set) {
+    int result = 0;
+    int sign = 1;
+
+    while (*str) {
+        if(*str >= '0' && *str <= '9'){
+            // Check for overflow before adding new digit
+            if (result > (INT_MAX - (*str - '0')) / 10)
+                error(set);
+            result = result * 10 + (*str - '0');
+            str++;
+        } else {
+            error(set);
+        }
+
+    }
+
+    return result * sign;
+}
+
+
+// === STACK LOW OPERATIONS ===
 void swap(Stack *stack) {
     if (!stack->top || !stack->top->next)
         return;
@@ -103,13 +133,22 @@ void swap(Stack *stack) {
     stack->top->next->value = temp;
 }
 
-void add(Node **top, int value){
-	Node* newNode = (Node*)malloc(sizeof(Node));
+void add(Stack *stack, int value){
+    // update top, size and bottom
+    Node* newNode = (Node*)malloc(sizeof(Node));
 	if(!newNode)
 		return;
-	newNode->next = *top;
-	newNode->value = value;
-	*top = newNode;
+    newNode->prev = NULL;
+    newNode->next = stack->top;
+    newNode->value = value;
+
+    if (stack->top)
+        stack->top->prev = newNode; // if top exists, update it's prev ptr to newly created node
+    else
+        stack->bottom = newNode; // first elem becomes the bottom too
+    
+    stack->top = newNode;
+    stack->size++;
 }
 
 void push_to(Stack *src, Stack *dst) {
@@ -228,13 +267,7 @@ void reverse_rotate(Stack *stack) {
     stack->top = temp;
 }
 
-// Algorithm
-void turk_sort(Set *set) {
-	
-
-}
-
-// === STACK OPERATIONS ===
+// === STACK HIGH OPERATIONS ===
 void sa(Set *set) { swap(set->a); }
 void sb(Set *set) { swap(set->b); }
 void ss(Set *set) { sa(set); sb(set); }
@@ -250,21 +283,51 @@ void rra(Set *set) { reverse_rotate(set->a); }
 void rrb(Set *set) { reverse_rotate(set->b); }
 void rrr(Set *set) { rra(set); rrb(set); }
 
+
+// === ALGORITHM ===
+void sort_three(Set *set) {
+    int a = set->a->top->value;
+    int b = set->a->top->next->value;
+    int c = set->a->bottom->value;
+
+    if (a > b && b < c && a < c)
+        sa(set);
+    else if (a > b && b > c)
+    {
+        sa(set);
+        rra(set);
+    }
+    else if (a > b && b < c && a > c)
+        ra(set);
+    else if (a < b && b > c && a < c)
+    {
+        sa(set);
+        ra(set);
+    }
+    else if (a < b && b > c && a > c)
+        rra(set);
+}
+
+void turk_sort(Set *set) {
+
+}
+
 // === TESTING SUITE ===
-int main(void){
-	Set *set = init_set();
-	Node *example = malloc(sizeof(Node));
+int main(int argc, char **argv) {
+    Set *set = init_set();
 
-	add(&(set->a->top), 2);
-	add(&(set->a->top), 43);
-	add(&(set->a->top), 30);
-	add(&(set->a->top), 5);
-	add(&(set->a->top), 107);
-	print_stack(set->a->top);
+    while(argc > 1){
+        add(set->a, ft_atoi(argv[--argc], set));
+    }
+    
+    printf("Before sorting:\n");
+    print_stack(set->a->top);
 
-	turk_sort(set);
-	print_stack(set->a->top);
+    turk_sort(set);
 
-	free_set(set);
-	return(0);
+    printf("\nAfter sorting:\n");
+    print_stack(set->a->top);
+
+    free_set(set);
+    return(0);
 }
