@@ -107,17 +107,26 @@ int ft_atoi(const char *str, Set *set) {
     int result = 0;
     int sign = 1;
 
+    // Check for negative sign
+    if (*str == '-') {
+        sign = -1;
+        str++;
+    }
+
     while (*str) {
         if(*str >= '0' && *str <= '9'){
             // Check for overflow before adding new digit
-            if (result > (INT_MAX - (*str - '0')) / 10)
+            if (result > (INT_MAX - (*str - '0')) / 10){
+                printf("overflow\n");
                 error(set);
+            }
+                
             result = result * 10 + (*str - '0');
             str++;
         } else {
+            printf("not a valid digit: %s\n", str);
             error(set);
         }
-
     }
 
     return result * sign;
@@ -420,8 +429,11 @@ int main(int argc, char **argv) {
 
     if(argc > 1){
         sorted_arr = malloc(sizeof(int) * argc - 1);
-        if(!sorted_arr)
+        if(!sorted_arr){
+            printf("mem fail\n");
             error(set);
+        }
+            
         while(argc > 1){
             int num = ft_atoi(argv[--argc], set);
             add(set->a, num);
