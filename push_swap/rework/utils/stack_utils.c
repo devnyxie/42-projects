@@ -6,27 +6,11 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:05:41 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:05:42 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:34:24 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-// Helper function: Count nodes in a stack
-int	stack_size(t_stack *stack)
-{
-	int		count;
-	t_node	*curr;
-
-	count = 0;
-	curr = stack->top;
-	while (curr)
-	{
-		count++;
-		curr = curr->next;
-	}
-	return (count);
-}
 
 // Helper function: Get the last node in a stack
 static t_node	*stack_last(t_stack *stack)
@@ -53,7 +37,6 @@ int	swap(t_stack *stack)
 		return (-1);
 	first = stack->top;
 	second = first->next;
-	// Swap value and index
 	tmp_value = first->value;
 	tmp_index = first->index;
 	first->value = second->value;
@@ -93,8 +76,7 @@ int	rotate(t_stack *stack)
 	return (0);
 }
 
-// Reverse rotate: shift down all elements; last becomes first
-int	reverseRotate(t_stack *stack)
+int	reverse_rotate(t_stack *stack)
 {
 	t_node	*prev;
 	t_node	*curr;
@@ -108,7 +90,6 @@ int	reverseRotate(t_stack *stack)
 		prev = curr;
 		curr = curr->next;
 	}
-	// 'curr' is the last element, 'prev' is second-to-last
 	if (prev)
 		prev->next = NULL;
 	curr->next = stack->top;

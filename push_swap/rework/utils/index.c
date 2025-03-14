@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:33:22 by shovsepy          #+#    #+#             */
-/*   Updated: 2025/03/14 16:04:52 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:28:57 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 static t_node	*get_next_min(t_stack *stack)
 {
 	t_node	*current;
-	t_node	*minNode;
+	t_node	*min_node;
 
 	if (!stack || !stack->top)
 	{
 		return (NULL);
 	}
 	current = stack->top;
-	minNode = NULL;
+	min_node = NULL;
 	while (current)
 	{
-		if (current->index == -1 && (!minNode
-				|| current->value < minNode->value))
-			minNode = current;
+		if (current->index == -1 && (!min_node
+				|| current->value < min_node->value))
+			min_node = current;
 		current = current->next;
 	}
-	return (minNode);
+	return (min_node);
 }
 
 void	index_stack(t_stack *a)

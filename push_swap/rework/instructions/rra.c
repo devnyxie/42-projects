@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:13:22 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:23 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:27:54 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rra(t_set *set)
 {
-	if (reverseRotate(set->a) == -1)
+	if (reverse_rotate(set->a) == -1)
 		return (-1);
 	ft_print("rra\n");
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:59:15 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 15:53:58 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:34:35 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int					stack_size(t_stack *stack);
 int					swap(t_stack *stack);
 int					push(t_stack *to, t_stack *from);
 int					rotate(t_stack *stack);
-int					reverseRotate(t_stack *stack);
+int					reverse_rotate(t_stack *stack);
 
 // stack_instructions.c
 int					sa(t_set *set);

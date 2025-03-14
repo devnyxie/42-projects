@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:35:44 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 15:35:44 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:44:11 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ int	main(int argc, char **argv)
 		free_set(set);
 		return (0);
 	}
-	print_stack(set->a->top);
 	sort_stack(set);
-	print_stack(set->a->top);
 	free_set(set);
 	return (0);
 }
