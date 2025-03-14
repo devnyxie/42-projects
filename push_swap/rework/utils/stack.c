@@ -1,7 +1,7 @@
 #include "../includes/push_swap.h"
 
-void add(Stack *stack, int value) {
-    Node *newNode = (Node *)malloc(sizeof(Node));
+void add(t_stack *stack, int value) {
+    t_node *newNode = (t_node *)malloc(sizeof(t_node));
     if (!newNode)
         return;
     
@@ -11,8 +11,8 @@ void add(Stack *stack, int value) {
     stack->top = newNode;
 }
 
-void add_end(Stack *stack, int value) {
-    Node *newNode = (Node *)malloc(sizeof(Node));
+void add_end(t_stack *stack, int value) {
+    t_node *newNode = (t_node *)malloc(sizeof(t_node));
     if (!newNode)
         return;
 
@@ -23,7 +23,7 @@ void add_end(Stack *stack, int value) {
     if (!stack->top) {
         stack->top = newNode;
     } else {
-        Node *current = stack->top;
+        t_node *current = stack->top;
         while (current->next) {
             current = current->next;
         }
@@ -31,7 +31,7 @@ void add_end(Stack *stack, int value) {
     }
 }
 
-static void fill_stack(char **argv, int argc, Stack *a) {
+static void fill_stack(char **argv, int argc, t_stack *a) {
     char **args;
     int i;
 
@@ -53,13 +53,13 @@ static void fill_stack(char **argv, int argc, Stack *a) {
         free_args(args);
 }
 
-Set *init_set(int argc, char **argv)
+t_set *init_set(int argc, char **argv)
 {
-	Set *set = malloc(sizeof(Set));
+	t_set *set = malloc(sizeof(t_set));
 	if(!set)
 		error(set);
-	set->a = malloc(sizeof(Stack));
-	set->b = malloc(sizeof(Stack));
+	set->a = malloc(sizeof(t_stack));
+	set->b = malloc(sizeof(t_stack));
 	if(!set->a || !set->b)
 		error(set);
 	set->a->top = NULL;
@@ -68,8 +68,8 @@ Set *init_set(int argc, char **argv)
     return set;
 }
 
-int is_sorted(Stack *stack) {
-    Node *current = stack->top;
+int is_sorted(t_stack *stack) {
+    t_node *current = stack->top;
     
     while (current && current->next) {
         if (current->value > current->next->value)

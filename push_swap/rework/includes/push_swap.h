@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:59:15 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 14:04:48 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:53:58 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,25 @@ int					pb(t_set *set);
 int					pa(t_set *set);
 // radix.c
 void				radix_sort(t_set *set);
+
+// stack_utils.c
+int					stack_size(t_stack *stack);
+int					swap(t_stack *stack);
+int					push(t_stack *to, t_stack *from);
+int					rotate(t_stack *stack);
+int					reverseRotate(t_stack *stack);
+
+// stack_instructions.c
+int					sa(t_set *set);
+int					sb(t_set *set);
+int					ss(t_set *set);
+int					pa(t_set *set);
+int					pb(t_set *set);
+int					ra(t_set *set);
+int					rb(t_set *set);
+int					rr(t_set *set);
+int					rra(t_set *set);
+int					rrb(t_set *set);
+int					rrr(t_set *set);
+
 #endif

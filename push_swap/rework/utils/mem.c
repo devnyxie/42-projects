@@ -11,9 +11,9 @@ void	free_args(char **str)
 		free(str[i--]);
 }
 
-void free_stack(Stack *stack){
-	Node *current = stack->top;
-	Node *next;
+void free_stack(t_stack *stack){
+	t_node *current = stack->top;
+	t_node *next;
 
 	while(current)
     {
@@ -24,7 +24,7 @@ void free_stack(Stack *stack){
 	free(stack);
 }
 
-void free_set(Set *set){
+void free_set(t_set *set){
 	if(set){
 		if(set->a)
 			free_stack(set->a);

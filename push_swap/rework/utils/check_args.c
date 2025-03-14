@@ -28,7 +28,7 @@ static int	ft_isnum(char *num)
 	return (1);
 }
 
-void	ft_check_args(int argc, char **argv, Set *set)
+void	ft_check_args(int argc, char **argv, t_set *set)
 {
 	int		i;
 	long	tmp;

@@ -6,19 +6,19 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:33:22 by shovsepy          #+#    #+#             */
-/*   Updated: 2025/03/12 20:41:14 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/14 15:49:00 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static Node* get_next_min(Stack *stack) {
+static t_node* get_next_min(t_stack *stack) {
     if (!stack || !stack->top) {
         return NULL;
     }
 
-    Node *current = stack->top;
-    Node *minNode = NULL;
+    t_node *current = stack->top;
+    t_node *minNode = NULL;
     
     while (current) {
         if (current->index == -1 && (!minNode || current->value < minNode->value))
@@ -30,9 +30,9 @@ static Node* get_next_min(Stack *stack) {
 }
 
 
-void	index_stack(Stack *a)
+void	index_stack(t_stack *a)
 {
-	Node	*head;
+	t_node	*head;
 	int		index;
 
 	index = 0;

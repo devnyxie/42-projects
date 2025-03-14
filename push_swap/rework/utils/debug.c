@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-void print_stack(Node *top) {
+void print_stack(t_node *top) {
     if (!top) {
         printf("Stack is empty\n");
         printf("------------------\n");
@@ -10,7 +10,7 @@ void print_stack(Node *top) {
     printf("Stack Top\n");
     printf("------------------\n");
     
-    Node *current = top;
+    t_node *current = top;
     while (current) {
         printf("│ %d\n", current->value);
         printf("│ ↓\n");
