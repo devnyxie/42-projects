@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:09:47 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:09:48 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
 
-int	ft_printf(const char *str, ...)
+char	*ft_strchr(const char *str, int c)
 {
-	va_list	args;
-	int		len;
-
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	while (*str != '\0')
 	{
-		if (*str == '%')
+		if (*str == (char)c)
 		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
+			return ((char *)str);
 		}
-		else
-			len += write(1, str, 1);
 		str++;
 	}
-	va_end(args);
-	return (len);
+	if (c == '\0')
+	{
+		return ((char *)str);
+	}
+	return (NULL);
 }
+/*
+int	main(void){
+	char *str = "Testing";
+	char *ptr = strchr(str, 's');
+	printf("%s", ptr);
+	return(0);
+}
+*/

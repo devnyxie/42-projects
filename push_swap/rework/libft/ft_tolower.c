@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:13:55 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:13:57 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_printf(const char *str, ...)
+int	ft_tolower(int c)
 {
-	va_list	args;
-	int		len;
-
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	if (c >= 65 && c <= 90)
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		c += 32;
 	}
-	va_end(args);
-	return (len);
+	return (c);
 }

@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:11:05 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:11:06 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	ft_printf(const char *str, ...)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	va_list	args;
-	int		len;
+	unsigned int	i;
+	char			*res;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	res = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < (unsigned int)ft_strlen(s))
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		res[i] = (*f)(i, s[i]);
+		i++;
 	}
-	va_end(args);
-	return (len);
+	res[i] = 0;
+	return (res);
 }

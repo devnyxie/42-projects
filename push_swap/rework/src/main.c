@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2025/03/13 15:35:44 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/13 15:35:44 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/push_swap.h"
 
-int	ft_printf(const char *str, ...)
+void	sort_stack(t_set *set)
 {
-	va_list	args;
-	int		len;
+	radix_sort(set);
+}
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+int	main(int argc, char **argv)
+{
+	t_set	*set;
+
+	set = NULL;
+	if (argc < 2)
+		return (-1);
+	ft_check_args(argc, argv, set);
+	set = init_set(argc, argv);
+	if (is_sorted(set->a))
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		free_set(set);
+		return (0);
 	}
-	va_end(args);
-	return (len);
+	print_stack(set->a->top);
+	sort_stack(set);
+	print_stack(set->a->top);
+	free_set(set);
+	return (0);
 }

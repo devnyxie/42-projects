@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 18:33:22 by shovsepy          #+#    #+#             */
-/*   Updated: 2021/07/09 18:33:23 by shovsepy         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:49:29 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ typedef struct s_list
 // Util functions
 t_list	*ft_lstnew(int value);
 t_list	*ft_lstlast(t_list *head);
-void	ft_lstadd_front(t_list **stack, t_list *new);
-void	ft_lstadd_back(t_list **stack, t_list *new);
+void	ft_lstadd_back(t_list **stack, t_list *new_elem);
 void	printList(t_list *head);
 int		ft_lstsize(t_list *head);
 

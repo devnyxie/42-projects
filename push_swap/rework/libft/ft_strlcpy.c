@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:10:44 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:10:45 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stddef.h>
 
-int	ft_printf(const char *str, ...)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	va_list	args;
-	int		len;
+	size_t	i;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	i = 0;
+	if (size == 0)
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		return (ft_strlen(src));
 	}
-	va_end(args);
-	return (len);
+	while (src[i] != '\0' && i < size - 1)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	while (src[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

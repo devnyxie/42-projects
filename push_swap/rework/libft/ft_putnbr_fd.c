@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:09:19 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:20:24 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <unistd.h>
 
-int	ft_printf(const char *str, ...)
+// writes the integer n to the file descriptor fd
+void	ft_putnbr_fd(int n, int fd)
 {
-	va_list	args;
-	int		len;
+	char	num;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	if (n == -2147483648)
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		write(fd, "-2147483648", 11);
 	}
-	va_end(args);
-	return (len);
+	else if (n < 0)
+	{
+		write(fd, "-", 1);
+		ft_putnbr_fd(n * (-1), fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+	{
+		num = n + '0';
+		write(fd, &num, 1);
+	}
 }

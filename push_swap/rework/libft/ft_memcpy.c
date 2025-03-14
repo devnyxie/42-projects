@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:36 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:08:36 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
 
-int	ft_printf(const char *str, ...)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	va_list	args;
-	int		len;
+	size_t				i;
+	const unsigned char	*src_ptr = (const unsigned char *)src;
+	unsigned char		*dest_ptr;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	i = 0;
+	dest_ptr = (unsigned char *)dest;
+	while (i < n)
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		dest_ptr[i] = src_ptr[i];
+		i++;
 	}
-	va_end(args);
-	return (len);
+	return (dest);
 }

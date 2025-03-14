@@ -214,52 +214,6 @@ int is_sorted(Stack *stack) {
     return 1;
 }
 
-// ??? Find the smallest number in the stack
-// int find_min(Stack *stack) {
-//     if (!stack->top)
-//         return 0;
-    
-//     int min = stack->top->value;
-//     Node *current = stack->top->next;
-    
-//     while (current) {
-//         if (current->value < min)
-//             min = current->value;
-//         current = current->next;
-//     }
-//     return min;
-// }
-
-// // ??? Find the largest number in the stack
-// int find_max(Stack *stack) {
-//     if (!stack->top)
-//         return 0;
-    
-//     int max = stack->top->value;
-//     Node *current = stack->top->next;
-    
-//     while (current) {
-//         if (current->value > max)
-//             max = current->value;
-//         current = current->next;
-//     }
-//     return max;
-// }
-
-// ??? Find the position of a number in stack
-// int find_position(Stack *stack, int num) {
-//     int pos = 0;
-//     Node *current = stack->top;
-    
-//     while (current) {
-//         if (current->value == num)
-//             return pos;
-//         current = current->next;
-//         pos++;
-//     }
-//     return -1;
-// }
-
 // Rotate: top element goes to bottom
 void rotate(Stack *stack) {
     if (!stack->top || stack->size <= 1)

@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:12:23 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:12:39 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
 
-int	ft_printf(const char *str, ...)
+// find the last occurrence of the character c in the string str
+char	*ft_strrchr(const char *str, int c)
 {
-	va_list	args;
-	int		len;
+	char	*result;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	result = NULL;
+	while (*str != '\0')
 	{
-		if (*str == '%')
+		if (*str == (char)c)
 		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
+			result = (char *)str;
 		}
-		else
-			len += write(1, str, 1);
 		str++;
 	}
-	va_end(args);
-	return (len);
+	if (c == '\0')
+	{
+		return ((char *)str);
+	}
+	return (result);
 }
+/*
+int	main(void){
+	char *str = "Testingsussy";
+	char *ptr = ft_strrchr(str, 's');
+	printf("%s", ptr);
+	return(0);
+}
+*/

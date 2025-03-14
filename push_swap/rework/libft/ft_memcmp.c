@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:28 by tafanasi          #+#    #+#             */
+/*   Updated: 2024/12/16 17:08:29 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
 
-int	ft_printf(const char *str, ...)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	va_list	args;
-	int		len;
+	const unsigned char	*s1_ptr = (const unsigned char *)s1;
+	const unsigned char	*s2_ptr = (const unsigned char *)s2;
+	size_t				i;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	i = 0;
+	while (i < n)
 	{
-		if (*str == '%')
+		if (s1_ptr[i] != s2_ptr[i])
 		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
+			return (s1_ptr[i] - s2_ptr[i]);
 		}
-		else
-			len += write(1, str, 1);
-		str++;
+		i++;
 	}
-	va_end(args);
-	return (len);
+	return (0);
 }

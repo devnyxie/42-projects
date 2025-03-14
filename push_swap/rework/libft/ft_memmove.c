@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 04:02:33 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:26:31 by tafanasi         ###   ########.fr       */
+/*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/13 14:06:05 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
+#include <stdio.h>
 
-int	ft_printf(const char *str, ...)
+// copies n bytes from memory area src to memory area dest
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	va_list	args;
-	int		len;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	va_start(args, str);
-	len = 0;
-	while (*str)
+	d = dest;
+	s = src;
+	if (d == s)
+		return (dest);
+	if (d < s)
 	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '\0')
-				break ;
-			ft_handle_specifiers(*str, &len, args);
-		}
-		else
-			len += write(1, str, 1);
-		str++;
+		while (n--)
+			*d++ = *s++;
 	}
-	va_end(args);
-	return (len);
+	else
+	{
+		d = d + n;
+		s = s + n;
+		while (n--)
+			*(--d) = *(--s);
+	}
+	return (dest);
 }
