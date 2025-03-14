@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/14 16:05:41 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/14 16:05:42 by tafanasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 // Helper function: Count nodes in a stack
@@ -72,13 +84,13 @@ int	rotate(t_stack *stack)
 	t_node	*last;
 
 	if (stack_size(stack) < 2)
-		return -1;
+		return (-1);
 	first = stack->top;
 	last = stack_last(stack);
 	stack->top = first->next;
 	first->next = NULL;
 	last->next = first;
-	return 0;
+	return (0);
 }
 
 // Reverse rotate: shift down all elements; last becomes first
@@ -88,7 +100,7 @@ int	reverseRotate(t_stack *stack)
 	t_node	*curr;
 
 	if (stack_size(stack) < 2)
-		return -1;
+		return (-1);
 	prev = NULL;
 	curr = stack->top;
 	while (curr->next)
@@ -101,5 +113,5 @@ int	reverseRotate(t_stack *stack)
 		prev->next = NULL;
 	curr->next = stack->top;
 	stack->top = curr;
-	return 0;
+	return (0);
 }

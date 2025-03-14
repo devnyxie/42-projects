@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   rrb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 16:04:41 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:04:43 by tafanasi         ###   ########.fr       */
+/*   Created: 2025/03/14 16:12:43 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/14 16:12:47 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_print(const char *str)
+int	rrb(t_set *set)
 {
-	if (str)
-	{
-		while (*str)
-		{
-			write(1, str, 1);
-			str++;
-		}
-	}
+	if (reverseRotate(set->b) == -1)
+		return (-1);
+	ft_print("rrb\n");
+	return (0);
 }

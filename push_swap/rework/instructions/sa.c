@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   sa.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 16:04:41 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:04:43 by tafanasi         ###   ########.fr       */
+/*   Created: 2025/03/14 16:12:32 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/14 16:12:34 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_print(const char *str)
+int	sa(t_set *set)
 {
-	if (str)
-	{
-		while (*str)
-		{
-			write(1, str, 1);
-			str++;
-		}
-	}
+	if (swap(set->a) == -1)
+		return (-1);
+	ft_print("sa\n");
+	return (0);
 }

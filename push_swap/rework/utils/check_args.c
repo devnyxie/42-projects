@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/14 16:04:01 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/14 16:04:03 by tafanasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static int	ft_contains(int num, char **argv, int i)
@@ -32,7 +44,7 @@ void	ft_check_args(int argc, char **argv, t_set *set)
 {
 	int		i;
 	long	tmp;
-	char	**args;	
+	char	**args;
 
 	i = 0;
 	if (argc == 2)
@@ -42,17 +54,17 @@ void	ft_check_args(int argc, char **argv, t_set *set)
 		i = 1;
 		args = argv;
 	}
-    while (args[i])
-    {
-        tmp = ft_atoi(args[i]);
-        if (!ft_isnum(args[i]))
-            error(set);
-        if (tmp < -2147483648 || tmp > 2147483647)
-            error(set);
-        if (ft_contains(tmp, args, i))
-            error(set);
-        i++;
-    }
+	while (args[i])
+	{
+		tmp = ft_atoi(args[i]);
+		if (!ft_isnum(args[i]))
+			error(set);
+		if (tmp < -2147483648 || tmp > 2147483647)
+			error(set);
+		if (ft_contains(tmp, args, i))
+			error(set);
+		i++;
+	}
 	if (argc == 2)
 		free_args(args);
 }

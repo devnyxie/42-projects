@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   rrr.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 16:04:41 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:04:43 by tafanasi         ###   ########.fr       */
+/*   Created: 2025/03/14 16:13:29 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/14 16:13:33 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_print(const char *str)
+int	rrr(t_set *set)
 {
-	if (str)
-	{
-		while (*str)
-		{
-			write(1, str, 1);
-			str++;
-		}
-	}
+	if (stack_size(set->a) < 2 || stack_size(set->b) < 2)
+		return (-1);
+	reverseRotate(set->a);
+	reverseRotate(set->b);
+	ft_print("rrr\n");
+	return (0);
 }

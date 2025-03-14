@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/14 16:05:48 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/03/14 16:05:53 by tafanasi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-void error(t_set *set){
-    ft_print("Error\n");
-    free_set(set);
-    exit(1);
+void	error(t_set *set)
+{
+	ft_print("Error\n");
+	free_set(set);
+	exit(1);
 }
