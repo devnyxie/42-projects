@@ -6,14 +6,14 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:59:15 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:34:35 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:39:38 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+// # include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -38,6 +38,8 @@ typedef struct s_set
 
 // utils.c
 void				error(t_set *set);
+int					get_distance(t_node *node, int index);
+int					get_min(t_stack *stack, int val);
 // mem.c
 void				free_stack(t_stack *stack);
 void				free_set(t_set *set);
@@ -70,7 +72,10 @@ int					push(t_stack *to, t_stack *from);
 int					rotate(t_stack *stack);
 int					reverse_rotate(t_stack *stack);
 
-// stack_instructions.c
+// simple.c
+void				simple_sort(t_set *set);
+
+// stack_instructions
 int					sa(t_set *set);
 int					sb(t_set *set);
 int					ss(t_set *set);
@@ -82,5 +87,12 @@ int					rr(t_set *set);
 int					rra(t_set *set);
 int					rrb(t_set *set);
 int					rrr(t_set *set);
+
+// ft_atoi.c
+int					ft_atoi(const char *str);
+// ft_isdigit.c
+int					ft_isdigit(int c);
+// ft_split.c
+char				**ft_split(char const *s, char c);
 
 #endif

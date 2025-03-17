@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:05:04 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:05:06 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:06:36 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_args(char **str)
 		i++;
 	while (i >= 0)
 		free(str[i--]);
+	free(str);
 }
 
 void	free_stack(t_stack *stack)

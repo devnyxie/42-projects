@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:35:44 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:44:11 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:55:01 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	sort_stack(t_set *set)
 {
-	radix_sort(set);
+	if (stack_size(set->a) <= 5)
+		simple_sort(set);
+	else
+		radix_sort(set);
 }
 
 int	main(int argc, char **argv)

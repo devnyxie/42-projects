@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:05:48 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/03/14 16:24:47 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:34:51 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,40 @@ int	stack_size(t_stack *stack)
 		curr = curr->next;
 	}
 	return (count);
+}
+
+int	get_distance(t_node *node, int index)
+{
+	t_node	*head;
+	int		distance;
+
+	distance = 0;
+	head = node;
+	while (head)
+	{
+		if (head->index == index)
+			break ;
+		distance++;
+		head = head->next;
+	}
+	return (distance);
+}
+
+// get min index from stack
+int	get_min(t_stack *stack, int val)
+{
+	t_node	*head;
+	int		min;
+
+	head = stack->top;
+	min = head->index;
+	while (head->next)
+	{
+		head = head->next;
+		if ((head->index < min) && head->index != val)
+			min = head->index;
+	}
+	return (min);
 }
 
 void	error(t_set *set)
