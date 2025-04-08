@@ -1,9 +1,8 @@
-# Define variables
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
-SRC = pipex.c
+SRC = pipex.c get_cmd_path.c utils.c
 OBJ = $(SRC:.c=.o)
 NAME = pipex
 
@@ -34,3 +33,6 @@ fclean: clean
 
 # Rebuild everything
 re: fclean all
+
+# Phony targets
+.PHONY: all clean fclean re
