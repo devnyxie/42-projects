@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 04:01:27 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/04/09 06:08:36 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/04/09 06:31:38 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,25 @@ void	free_2d(char **str)
 		i++;
 	}
 	free(str);
+}
+
+// Open file with appropriate flags based on mode
+// mode 0 = read (infile), mode 1 = write (outfile)
+int	open_file(const char *path, int mode)
+{
+	int	fd;
+
+	if (mode == 0)
+		fd = open(path, O_RDONLY);
+	else
+		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	
+	if (fd < 0)
+	{
+		if (mode == 0)
+			perror("Error opening infile");
+		else
+			perror("Error opening outfile");
+	}
+	return (fd);
 }
