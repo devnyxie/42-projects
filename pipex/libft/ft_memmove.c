@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:08:39 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/08 04:57:29 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/04/09 07:00:31 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	s = src;
 	if (d == s)
 		return (dest);
-
 	if (d < s)
 	{
 		while (n--)

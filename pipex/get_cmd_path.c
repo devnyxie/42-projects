@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 03:47:54 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/04/09 05:48:46 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/04/09 06:59:19 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	find_env_path(char **envp, char **path_env)
 
 	j = 0;
 	*path_env = NULL;
-	// while (envp && envp[j])
 	while (envp[j])
 	{
 		if (ft_strncmp(envp[j], "PATH=", 5) == 0)
@@ -37,8 +36,6 @@ static char	*search_cmd_path(char **paths, char *cmd)
 	int		i;
 
 	i = 0;
-	// if (!paths || !cmd || !*cmd)
-	// 	return (NULL);
 	while (paths[i])
 	{
 		full_path = ft_strjoin(paths[i], "/");
@@ -65,14 +62,6 @@ char	*get_cmd_path(char *cmd, char **envp)
 	char	*path_env;
 	char	*result;
 
-	// if (!cmd || !*cmd)
-	// 	return (NULL);
-	// if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
-	// {
-	// 	if (access(cmd, X_OK) == 0)
-	// 		return (ft_strdup(cmd));
-	// 	return (NULL);
-	// }
 	find_env_path(envp, &path_env);
 	if (!path_env)
 		return (NULL);
