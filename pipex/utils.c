@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tafanasi <tafanasi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 03:47:28 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/04/08 03:47:30 by tafanasi         ###   ########.fr       */
+/*   Created: 2025/04/08 04:01:27 by tafanasi          #+#    #+#             */
+/*   Updated: 2025/04/09 06:08:36 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	error_exit(const char *msg)
+// Exit with an error message and specified exit code
+void	error_exit(const char *msg, int exit_code)
 {
 	perror(msg);
-	exit(EXIT_FAILURE);
+	exit(exit_code);
 }
 
+// Free a 2D array (array of strings)
 void	free_2d(char **str)
 {
 	int	i;
@@ -29,16 +31,4 @@ void	free_2d(char **str)
 		i++;
 	}
 	free(str);
-}
-
-void	init_pipe(char **argv, int *infile, int *outfile, int pipefd[2])
-{
-	*infile = open(argv[1], O_RDONLY);
-	if (*infile < 0)
-		error_exit("infile");
-	*outfile = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (*outfile < 0)
-		error_exit("outfile");
-	if (pipe(pipefd) < 0)
-		error_exit("pipe");
 }
