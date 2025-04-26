@@ -1,10 +1,10 @@
 NAME = so_long
 
-SRCS = main.c
+SRCS = so_long.c utils.c map.c
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Imlx -I$(GNL_DIR) -I$(LIBFT_DIR)
+CFLAGS = -Wall -Wextra -Werror -I -Imlx -I$(GNL_DIR) -I$(LIBFT_DIR)
 
 GNL_DIR = get_next_line
 GNL = $(GNL_DIR)/get_next_line.a
