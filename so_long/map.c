@@ -12,6 +12,11 @@
 
 #include "so_long.h"
 
+typedef struct {
+    int x;
+    int y;
+} Position;
+
 void	validate_file(char *path)
 {
 	if (ft_strnstr(path, ".ber", ft_strlen(path)) == NULL)
@@ -20,12 +25,69 @@ void	validate_file(char *path)
 		handle_error(strerror(errno), 1);
 }
 
+char **cp_map(char **map, int height, int width)
+{
+    char **result;
+
+    result = malloc((height + 1) * sizeof(char*));
+    if(!result)
+        handle_error("malloc failed", 1);
+    result[height] = NULL;
+
+    int i;
+    int j;
+
+    i = 0;
+    while (i < height){
+        j = 0;
+        result[i] = malloc((width+1)*sizeof(char));
+        if(!result[i])
+            handle_error("malloc failed", 1);
+        result[i][width] = '\0';
+        while(j < width){
+            result[i][j] = map[i][j];
+            j++;
+        }
+        i++;
+    }
+    return(result);
+}
+
+void dfs(char **map, int x, int y) {
+    if (map[y][x] == '1' || map[y][x] == 'V')
+        return;
+
+    map[y][x] = 'V'; // mark as visited
+
+    dfs(map, x + 1, y); // right
+    dfs(map, x - 1, y); // left
+    dfs(map, x, y + 1); // down
+    dfs(map, x, y - 1); // up
+}
+
+// @return (x,y)
+Position find_pos(char **map, int height, int width, char letter)
+{
+    Position p;
+    p.y = 0;
+    while(p.y < height){
+        p.x = 0;
+        while(p.x < width){
+            if(map[p.y][p.x] == letter)
+                return(p);
+            p.x++;
+        }
+        p.y++;
+    }
+    return((Position){-1, -1});
+}
+
 int validate_map(char **map, int height)
 {
     printf("Validating the map...\n");
     int exit_count; // 1
-    int collectibles; // 1+
-    int start_pos; // 1
+    int collectibles_count; // 1+
+    int start_pos_count; // 1
     int width; // less or more than rows (height) W ≥ 3,  H ≥ 3
     int i;
     // TODO
@@ -33,8 +95,8 @@ int validate_map(char **map, int height)
     
     i = 0;
     exit_count = 0;
-    start_pos = 0;
-    collectibles = 0;
+    start_pos_count = 0;
+    collectibles_count = 0;
     width = ft_strlen(map[i]);
     while(i < height) {
         // printf("iteration %d\n", i);
@@ -56,9 +118,9 @@ int validate_map(char **map, int height)
                     printf("exiting at walls\n");
                     return(0);
                 }
-            // collectibles
+            // collectibles_count
             if(row[j] == 'C')
-                collectibles++;
+                collectibles_count++;
             // exits
             if(row[j] == 'E'){
                 if(exit_count == 0)
@@ -70,8 +132,8 @@ int validate_map(char **map, int height)
             }
             // starting pos
             if(row[j] == 'P'){
-                if(start_pos == 0)
-                    start_pos = 1;
+                if(start_pos_count == 0)
+                    start_pos_count = 1;
                 else {
                     printf("exiting at positions\n");
                     return(0);
@@ -82,10 +144,26 @@ int validate_map(char **map, int height)
         }
         i++;
     }
-    if(collectibles < 1 || start_pos != 1 || exit_count != 1){
+    if(collectibles_count < 1 || start_pos_count != 1 || exit_count != 1){
         printf("exiting at final check\n");
         return(0);
     }
+    // check if at least 1 C and one E is reachable from P
+    char **copy = cp_map(map, height, width);
+    for (int i = 0; i < height; i++) {
+        printf("%s\n", copy[i]);
+    }
+    // check if the map's exit is reachable
+    Position start_pos_loc = find_pos(map, height, width, 'P');
+    Position exit = find_pos(map, height, width, 'E');
+    Position coin = find_pos(map, height, width, 'C');
+    dfs(copy, start_pos_loc.x, start_pos_loc.y);
+    if(copy[exit.y][exit.x] != 'V' || copy[coin.y][coin.x] != 'V'){
+        free_2d(copy);
+        handle_error("Could not find path to exit the map or at least one collectible", 1);
+        return(0);
+    }
+    free_2d(copy);
     return(1);
 }
 
