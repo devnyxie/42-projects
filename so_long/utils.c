@@ -41,7 +41,15 @@ void	handle_error(const char *message, int exit_code)
 	exit(exit_code);
 }
 
-int count_lines(char *filename)
+int	map_height(char **map)
+{
+	int i = 0;
+	while (map[i])
+		i++;
+	return (i);
+}
+
+int count_lines_fd(char *filename)
 {
     char buf[64];
     int fd;

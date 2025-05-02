@@ -195,18 +195,18 @@ char	**get_map(char *path)
 	char	**map;
 	int		fd;
     int     result;
-	int		map_size;
+	int		map_height;
 
     validate_file(path);
     fd = open(path, O_RDONLY);
 	if (fd == -1)
 		handle_error(strerror(errno), 1);
-	map_size = count_lines(path);
-	map = malloc((map_size + 1) * sizeof(char *));
+	map_height = count_lines_fd(path);
+	map = malloc((map_height + 1) * sizeof(char *));
 	if (!map)
 		handle_error("malloc failed", 1);
 	parse_map(&map, fd);
-    result = validate_map(map, map_size);
+    result = validate_map(map, map_height);
     if(!result){
         free_2d(map);
         handle_error("Invalid map contents", 1);

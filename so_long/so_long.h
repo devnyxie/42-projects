@@ -19,6 +19,7 @@ char **get_map(char *str);
 int handle_exit(void *param);
 void free_2d(char **arr);
 void handle_error(const char *message, int exit_code);
-int count_lines(char *filename);
+int count_lines_fd(char *filename);
+int map_height(char **map);
 
 #endif
