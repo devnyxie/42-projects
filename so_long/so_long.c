@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:26:09 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/04 03:10:34 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/05 03:30:15 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,32 @@ typedef struct s_game {
 	char	**map;
 }	t_game;
 
+
+void free_game(t_game *game)
+{
+	if (game->img_wall)
+		mlx_destroy_image(game->mlx, game->img_wall);
+	if (game->img_floor)
+		mlx_destroy_image(game->mlx, game->img_floor);
+	if (game->img_player)
+		mlx_destroy_image(game->mlx, game->img_player);
+	if (game->img_exit)
+		mlx_destroy_image(game->mlx, game->img_exit);
+	if (game->img_collect)
+		mlx_destroy_image(game->mlx, game->img_collect);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->map)
+		free_2d(game->map);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	// == game is not allocated in the heap ==
+	// if (game)
+	// 	free(game);
+}
 
 void	load_images(t_game *game)
 {
@@ -101,36 +127,59 @@ int handle_keypress(int keycode, t_game *game)
             break;
     }
 
-    if (player_x == -1 || player_y == -1)
+    if (player_x == -1 || player_y == -1) {
         return (0); // Player not found
-
-    // Handle movement based on keycode
+    }
 
 
 	// any movement towards the exit
 	if(keycode == XK_Left && game->map[player_y][player_x - 1] == 'E') // Move left
 	{
+		free_game(game);
 		handle_exit(NULL);
 		return (0);
 	}
 	else if (keycode == XK_Right && game->map[player_y][player_x + 1] == 'E') // Move right
 	{
+		free_game(game);
 		handle_exit(NULL);
 		return (0);
 	}
 	else if (keycode == XK_Up && game->map[player_y - 1][player_x] == 'E') // Move up
 	{
+		free_game(game);
 		handle_exit(NULL);
 		return (0);
 	}
 	else if (keycode == XK_Down && game->map[player_y + 1][player_x] == 'E') // Move down
 	{
+		free_game(game);
 		handle_exit(NULL);
 		return (0);
 	}
-
-	// Prevent moving through the walls
+	// any movement towards the coins
+	if(keycode == XK_Left && game->map[player_y][player_x - 1] == 'C') // Move left
+	{
+		game->map[player_y][player_x] = '0';
+		game->map[player_y][player_x - 1] = 'P';
+	}
+	else if (keycode == XK_Right && game->map[player_y][player_x + 1] == 'C') // Move right
+	{
+		game->map[player_y][player_x] = '0';
+		game->map[player_y][player_x + 1] = 'P';
+	}
+	else if (keycode == XK_Up && game->map[player_y - 1][player_x] == 'C') // Move up
+	{
+		game->map[player_y][player_x] = '0';
+		game->map[player_y - 1][player_x] = 'P';
+	}
+	else if (keycode == XK_Down && game->map[player_y + 1][player_x] == 'C') // Move down
+	{
+		game->map[player_y][player_x] = '0';
+		game->map[player_y + 1][player_x] = 'P';
+	}
 	
+	// Movement keys, avoiding the exit and coins	
 
 	// walls
     if (keycode == XK_Left && game->map[player_y][player_x - 1] != '1') // Move left
@@ -153,9 +202,12 @@ int handle_keypress(int keycode, t_game *game)
         game->map[player_y][player_x] = '0';
         game->map[player_y + 1][player_x] = 'P';
     }
-	else if (keycode == XK_Escape) // Exit the game
+	
+	// escape key
+	if (keycode == XK_Escape) 
 	{
 		// todo: free everything
+		free_game(game);
 		handle_exit(NULL);
 		return (0);
 	}
@@ -193,7 +245,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 17, 0, handle_exit, NULL); // Close window
 	mlx_hook(game.win, 2, 1L << 0, handle_keypress, &game); // KeyPress event
 	mlx_loop(game.mlx);
-
-	free_2d(game.map);
+	// free_game(&game);
 	return (0);
 }
