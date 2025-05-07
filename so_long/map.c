@@ -6,24 +6,22 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/04/27 01:00:40 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/07 00:41:24 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-typedef struct {
-    int x;
-    int y;
-} Position;
-
 void	validate_file(char *path)
 {
-	if (ft_strnstr(path, ".ber", ft_strlen(path)) == NULL)
+	size_t	len = ft_strlen(path);
+
+	if (len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
 		handle_error("Invalid map file format. Expected .ber", 1);
 	if (access(path, F_OK) != 0)
 		handle_error(strerror(errno), 1);
 }
+
 
 char **cp_map(char **map, int height, int width)
 {
@@ -54,37 +52,19 @@ char **cp_map(char **map, int height, int width)
 }
 
 void dfs(char **map, int x, int y) {
-    if (map[y][x] == '1' || map[y][x] == 'V')
+    if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E')
         return;
-
-    map[y][x] = 'V'; // mark as visited
-
-    dfs(map, x + 1, y); // right
-    dfs(map, x - 1, y); // left
-    dfs(map, x, y + 1); // down
-    dfs(map, x, y - 1); // up
+    map[y][x] = 'V';
+    dfs(map, x + 1, y);
+    dfs(map, x - 1, y);
+    dfs(map, x, y + 1);
+    dfs(map, x, y - 1);
 }
 
-// @return (x,y)
-Position find_pos(char **map, int height, int width, char letter)
-{
-    Position p;
-    p.y = 0;
-    while(p.y < height){
-        p.x = 0;
-        while(p.x < width){
-            if(map[p.y][p.x] == letter)
-                return(p);
-            p.x++;
-        }
-        p.y++;
-    }
-    return((Position){-1, -1});
-}
 
 int validate_map(char **map, int height)
 {
-    printf("Validating the map...\n");
+    // printf("Validating the map...\n");
     int exit_count; // 1
     int collectibles_count; // 1+
     int start_pos_count; // 1
@@ -150,18 +130,39 @@ int validate_map(char **map, int height)
     }
     // check if at least 1 C and one E is reachable from P
     char **copy = cp_map(map, height, width);
-    for (int i = 0; i < height; i++) {
-        printf("%s\n", copy[i]);
-    }
+    // for (int i = 0; i < height; i++) {
+    //     printf("%s\n", copy[i]);
+    // }
     // check if the map's exit is reachable
     Position start_pos_loc = find_pos(map, height, width, 'P');
     Position exit = find_pos(map, height, width, 'E');
-    Position coin = find_pos(map, height, width, 'C');
+    // Position coin = find_pos(map, height, width, 'C');
     dfs(copy, start_pos_loc.x, start_pos_loc.y);
-    if(copy[exit.y][exit.x] != 'V' || copy[coin.y][coin.x] != 'V'){
+    // if(copy[exit.y][exit.x] != 'V' || copy[coin.y][coin.x] != 'V'){
+    //     free_2d(copy);
+    //     handle_error("Could not find path to exit the map or at least one collectible", 1);
+    //     return(0);
+    // }
+    /* 2.a Exit must be reachable */
+    if (copy[exit.y][exit.x] != 'V')
+    {
         free_2d(copy);
-        handle_error("Could not find path to exit the map or at least one collectible", 1);
-        return(0);
+        handle_error("Exit is unreachable", 1);
+        return (0);
+    }
+
+    /* 2.b All coins must be reachable: no 'C' should remain */
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            if (map[y][x] == 'C' && copy[y][x] != 'V')
+            {
+                free_2d(copy);
+                handle_error("At least one collectible is unreachable", 1);
+                return (0);
+            }
+        }
     }
     free_2d(copy);
     return(1);
@@ -198,15 +199,17 @@ char	**get_map(char *path)
 	int		map_height;
 
     validate_file(path);
+    printf("File `%s` is valid\n", path);
     fd = open(path, O_RDONLY);
 	if (fd == -1)
 		handle_error(strerror(errno), 1);
-	map_height = count_lines_fd(path);
+    map_height = count_lines_fd(path);
 	map = malloc((map_height + 1) * sizeof(char *));
 	if (!map)
 		handle_error("malloc failed", 1);
 	parse_map(&map, fd);
     result = validate_map(map, map_height);
+    printf("Map of file `%s` is valid\n", path);
     if(!result){
         free_2d(map);
         handle_error("Invalid map contents", 1);
