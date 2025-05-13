@@ -22,7 +22,7 @@ void	validate_file(char *path)
 		handle_error(strerror(errno), 1);
 }
 
-
+// TEGGRGRGR
 char **cp_map(char **map, int height, int width)
 {
 	char **result;
