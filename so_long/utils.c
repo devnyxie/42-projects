@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/07 00:15:04 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:20:45 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void free_game(t_game *game)
 void	handle_error(const char *message, int exit_code)
 {
 	if (!errno)
-		printf("%s\n", message);
+		ft_printf("%s\n", message);
 	else
 		perror(message);
 	exit(exit_code);

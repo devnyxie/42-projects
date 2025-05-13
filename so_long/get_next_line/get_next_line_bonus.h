@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 16:13:35 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/04/25 23:31:20 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:21:47 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ struct		s_buffer
 };
 
 char		*get_next_line(int fd);
-// char		*ft_strchr(const char *s, int c);
-// size_t		ft_strlen(const char *s);
-// void		*ft_memcpy(void *dest, const void *src, size_t n);
 char		*clear_buffer(struct s_buffer *buf);
 
 #endif

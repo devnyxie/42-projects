@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:35:07 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/06 23:47:03 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:20:39 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	handle_keypress(int keycode, t_game *game)
 	game->map[p.y][p.x] = '0';
 	game->map[p.y + dy][p.x + dx] = 'P';
 	game->moves++;
-	printf("Movements: %d\n", game->moves);
+	ft_printf("Movements: %d\n", game->moves);
 	draw_map(game, game->height, game->width);
 	return (0);
 }

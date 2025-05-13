@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/13 14:03:00 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:15:57 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ char **cp_map(char **map, int height, int width)
 // }
 
 void dfs(char **map, int x, int y) {
-	printf("%c\n", map[y][x]);
 	char yx = map[y][x];
 	if (yx == '1' || yx == 'V')
 		return;
@@ -78,7 +77,7 @@ void dfs(char **map, int x, int y) {
 
 int validate_map(char **map, int height)
 {
-	// printf("Validating the map...\n");
+	// ft_printf("Validating the map...\n");
 	int exit_count; // 1
 	int collectibles_count; // 1+
 	int start_pos_count; // 1
@@ -93,14 +92,14 @@ int validate_map(char **map, int height)
 	collectibles_count = 0;
 	width = ft_strlen(map[i]);
 	while(i < height) {
-		// printf("iteration %d\n", i);
+		// ft_printf("iteration %d\n", i);
 		char *row = map[i];
 		int j = 0;
 	
 		int row_len = ft_strlen(map[i]);
 		if(width != row_len) // row length is not equal
 		{
-			printf("exiting at not equal row length\n");
+			ft_printf("exiting at not equal row length\n");
 			return(0);
 		}
 		// while(row[j]){
@@ -109,7 +108,7 @@ int validate_map(char **map, int height)
 			// surrounding walls
 			if(i == 0 || i == (height - 1) || j == 0 || j == (row_len - 1))
 				if(row[j] != '1'){
-					printf("exiting at walls\n");
+					ft_printf("exiting at walls\n");
 					return(0);
 				}
 			// collectibles_count
@@ -120,7 +119,7 @@ int validate_map(char **map, int height)
 				if(exit_count == 0)
 					exit_count = 1;
 				else {
-					printf("exiting at exits\n");
+					ft_printf("exiting at exits\n");
 					return(0);
 				}
 			}
@@ -129,7 +128,7 @@ int validate_map(char **map, int height)
 				if(start_pos_count == 0)
 					start_pos_count = 1;
 				else {
-					printf("exiting at positions\n");
+					ft_printf("exiting at positions\n");
 					return(0);
 				}
 			}
@@ -139,13 +138,13 @@ int validate_map(char **map, int height)
 		i++;
 	}
 	if(collectibles_count < 1 || start_pos_count != 1 || exit_count != 1){
-		printf("exiting at final check\n");
+		ft_printf("exiting at final check\n");
 		return(0);
 	}
 	// check if at least 1 C and one E is reachable from P
 	char **copy = cp_map(map, height, width);
 	// for (int i = 0; i < height; i++) {
-	//     printf("%s\n", copy[i]);
+	//     ft_printf("%s\n", copy[i]);
 	// }
 	// check if the map's exit is reachable
 	Position start_pos_loc = find_pos(map, height, width, 'P');
@@ -213,7 +212,7 @@ char	**get_map(char *path)
 	int		map_height;
 
 	validate_file(path);
-	printf("File `%s` is valid\n", path);
+	ft_printf("File `%s` is valid\n", path);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		handle_error(strerror(errno), 1);
@@ -223,7 +222,7 @@ char	**get_map(char *path)
 		handle_error("malloc failed", 1);
 	parse_map(&map, fd);
 	result = validate_map(map, map_height);
-	printf("Map of file `%s` is valid\n", path);
+	ft_printf("Map of file `%s` is valid\n", path);
 	if(!result){
 		free_2d(map);
 		handle_error("Invalid map contents", 1);
