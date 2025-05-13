@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/13 15:15:57 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:02:45 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	validate_file(char *path)
 		handle_error(strerror(errno), 1);
 }
 
-// TEGGRGRGR
 char **cp_map(char **map, int height, int width)
 {
 	char **result;
