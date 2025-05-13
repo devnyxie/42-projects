@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 04:02:25 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/01/10 04:28:45 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/01/15 14:45:39 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ void	ft_handle_specifiers(char current_char, int *len, va_list args)
 
 static void	ft_handle_char(int *len, va_list args)
 {
-    char c;
+	char	c;
+
 	c = va_arg(args, int);
 	*len += write(1, &c, 1);
 }
 
 static void	ft_handle_string(int *len, va_list args)
 {
-    char *temp_s;
+	char	*temp_s;
+
 	temp_s = va_arg(args, char *);
 	if (temp_s == NULL)
 		*len += write(1, "(null)", 6);
@@ -50,7 +52,7 @@ static void	ft_handle_string(int *len, va_list args)
 
 static void	ft_handle_pointer(int *len, va_list args)
 {
-	unsigned long ptr;
+	unsigned long	ptr;
 
 	ptr = va_arg(args, unsigned long);
 	if (!ptr)
@@ -66,4 +68,3 @@ static void	ft_handle_number(char specifier, int *len, va_list args)
 	else if (ft_strchr("uxX", specifier))
 		*len += ft_putnbr_base(va_arg(args, unsigned int), specifier);
 }
-
