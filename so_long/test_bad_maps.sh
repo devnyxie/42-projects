@@ -1,0 +1,5 @@
+for map in maps_err/badextension1.txt maps_err/badextension2.ber.txt maps_err/badextension3.bber maps_err/duplicate_exit.ber maps_err/duplicate_player.ber maps_err/map1.ber maps_err/no_exit.ber maps_err/no_object.ber maps_err/no_player.ber maps_err/no_rectangular.ber maps_err/no_rectangular1.ber maps_err/no_rectangular2.ber maps_err/no_rectangular3.ber maps_err/no_rectangular4.ber maps_err/no_rectangular5.ber maps_err/no_rectangular6.ber maps_err/no_rectangular7.ber maps_err/no_rectangular8.ber maps_err/no_rectangular9.ber maps_err/no_valid_road.ber maps_err/no_valid_road1.ber maps_err/no_valid_road10.ber maps_err/no_valid_road11.ber maps_err/no_valid_road12.ber maps_err/no_valid_road14.ber maps_err/no_valid_road15.ber maps_err/no_valid_road2.ber maps_err/no_valid_road3.ber maps_err/no_valid_road4.ber maps_err/no_valid_road5.ber maps_err/no_valid_road6.ber maps_err/no_valid_road7.ber maps_err/no_valid_road8.ber maps_err/no_valid_road9.ber
+do
+    echo "Running map: $map"
+    ./so_long "$map"
+done

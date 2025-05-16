@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:35:07 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/13 15:20:39 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:25:40 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	handle_keypress(int keycode, t_game *game)
 {
-	Position	p;
-	int			dx;
-	int			dy;
-	char		tile;
+	t_pos	p;
+	int		dx;
+	int		dy;
+	char	tile;
 
 	p = find_pos(game->map, game->height, game->width, 'P');
 	dx = 0;
