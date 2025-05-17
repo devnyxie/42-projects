@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:21:12 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 11:53:23 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:13:18 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	check_tiles(char **map, int height, int width, t_map_counts *counts)
 	return (1);
 }
 
-int	check_counts(char **map, int height, int width)
+int	check_counts(char **map, int height, int width, t_game *game)
 {
 	int				result;
 	t_map_counts	counts;
@@ -94,5 +94,6 @@ int	check_counts(char **map, int height, int width)
 	if (counts.collectibles < 1 || counts.start_positions != 1
 		|| counts.exits != 1)
 		return (0);
+	game->map_counts = counts;
 	return (1);
 }

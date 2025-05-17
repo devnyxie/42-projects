@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 22:26:09 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 12:00:32 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:13:31 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (handle_error("Usage: ./so_long <map_file.ber>", 1), 1);
 	game.moves = 0;
-	game.map = get_map(argv[1]);
+	game.acquired_collectibles = 0;
+	game.map = get_map(argv[1], &game);
 	game.height = map_height(game.map);
 	game.width = ft_strlen(game.map[0]);
 	if (!game.map || !game.map[0])

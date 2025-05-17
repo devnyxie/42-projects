@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 11:53:05 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:28:41 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	validate_file(char *path)
 	if (len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
 		handle_error("Invalid map file format. Expected .ber", 1);
 	if (access(path, F_OK) != 0)
-		handle_error(strerror(errno), 1);
+		handle_error("", 1);
 }
 
-int	val_map_v2(char **map, int height)
+int	val_map_v2(char **map, int height, t_game *game)
 {
 	int	width;
 
 	width = ft_strlen(map[0]);
-	if (!check_counts(map, height, width))
+	if (!check_counts(map, height, width, game))
 		return (0);
 	if (!check_reach(map, height, width))
 		return (0);
@@ -61,7 +61,7 @@ void	parse_map(char ***map, int fd)
 	}
 }
 
-char	**get_map(char *path)
+char	**get_map(char *path, t_game *game)
 {
 	char	**map;
 	int		fd;
@@ -69,22 +69,20 @@ char	**get_map(char *path)
 	int		map_height;
 
 	validate_file(path);
-	ft_printf("File `%s` is valid\n", path);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		handle_error(strerror(errno), 1);
 	map_height = count_lines_fd(path);
 	map = malloc((map_height + 1) * sizeof(char *));
 	if (!map)
-		handle_error("malloc failed", 1);
+		handle_error("Malloc failed", 1);
 	parse_map(&map, fd);
-	result = val_map_v2(map, map_height);
+	result = val_map_v2(map, map_height, game);
 	if (!result)
 	{
 		free_2d(map);
 		handle_error("Invalid map contents", 1);
 	}
-	ft_printf("Map of file `%s` is valid\n", path);
 	close(fd);
 	return (map);
 }

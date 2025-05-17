@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:27:59 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 11:53:33 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:23:12 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	**cp_map(char **map, int height, int width)
 
 	result = malloc((height + 1) * sizeof(char *));
 	if (!result)
-		handle_error("malloc failed", 1);
+		handle_error("Malloc failed", 1);
 	result[height] = NULL;
 	i = 0;
 	while (i < height)
@@ -28,7 +28,7 @@ static char	**cp_map(char **map, int height, int width)
 		j = 0;
 		result[i] = malloc((width + 1) * sizeof(char));
 		if (!result[i])
-			handle_error("malloc failed", 1);
+			handle_error("Malloc failed", 1);
 		result[i][width] = '\0';
 		while (j < width)
 		{
@@ -62,7 +62,7 @@ static void	check_exit_reachable(char **map_cp, t_pos exit)
 	if (map_cp[exit.y][exit.x] != 'V')
 	{
 		free_2d(map_cp);
-		handle_error("Exit is unreachable", 1);
+		handle_error("Error: exit is unreachable", 1);
 	}
 }
 
@@ -81,7 +81,8 @@ static void	check_collectibles_reachable(char **map, char **map_cp, int height,
 			if (map[y][x] == 'C' && map_cp[y][x] != 'V')
 			{
 				free_2d(map_cp);
-				handle_error("At least one collectible is unreachable", 1);
+				handle_error("Error: unreachable collectible(s)",
+					1);
 			}
 			x++;
 		}

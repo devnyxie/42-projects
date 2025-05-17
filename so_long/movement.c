@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:35:07 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 11:59:17 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:13:24 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,16 @@ static int	handle_tile_interaction(t_game *game, char tile)
 	if (tile == '1')
 		return (0);
 	if (tile == 'E')
+	{
+		if (game->acquired_collectibles < game->map_counts.collectibles)
+		{
+			ft_printf("You must collect all collectibles first!\n");
+			return (0);
+		}
 		handle_exit(game);
+	}
+	if (tile == 'C')
+		game->acquired_collectibles++;
 	return (1);
 }
 
