@@ -6,11 +6,46 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 21:35:07 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/16 13:25:40 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:59:17 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	update_player_position(t_game *game, t_pos p, int dx, int dy)
+{
+	game->map[p.y][p.x] = '0';
+	game->map[p.y + dy][p.x + dx] = 'P';
+	game->moves++;
+	ft_printf("Movements: %d\n", game->moves);
+	draw_map(game, game->height, game->width);
+}
+
+static int	handle_tile_interaction(t_game *game, char tile)
+{
+	if (tile == '1')
+		return (0);
+	if (tile == 'E')
+		handle_exit(game);
+	return (1);
+}
+
+static int	get_movement_delta(int keycode, int *dx, int *dy)
+{
+	*dx = 0;
+	*dy = 0;
+	if (keycode == XK_Left)
+		*dx = -1;
+	else if (keycode == XK_Right)
+		*dx = 1;
+	else if (keycode == XK_Up)
+		*dy = -1;
+	else if (keycode == XK_Down)
+		*dy = 1;
+	else if (keycode == XK_Escape)
+		return (-1);
+	return (*dx != 0 || *dy != 0);
+}
 
 int	handle_keypress(int keycode, t_game *game)
 {
@@ -20,138 +55,15 @@ int	handle_keypress(int keycode, t_game *game)
 	char	tile;
 
 	p = find_pos(game->map, game->height, game->width, 'P');
-	dx = 0;
-	dy = 0;
 	if (p.x < 0 || p.y < 0)
 		return (0);
-	if (keycode == XK_Left)
-		dx = -1;
-	else if (keycode == XK_Right)
-		dx = 1;
-	else if (keycode == XK_Up)
-		dy = -1;
-	else if (keycode == XK_Down)
-		dy = 1;
-	else if (keycode == XK_Escape)
+	if (get_movement_delta(keycode, &dx, &dy) == -1)
 		handle_exit(game);
 	if (dx == 0 && dy == 0)
 		return (0);
 	tile = game->map[p.y + dy][p.x + dx];
-	if (tile == '1')
+	if (!handle_tile_interaction(game, tile))
 		return (0);
-	if (tile == 'E')
-		handle_exit(game);
-	game->map[p.y][p.x] = '0';
-	game->map[p.y + dy][p.x + dx] = 'P';
-	game->moves++;
-	ft_printf("Movements: %d\n", game->moves);
-	draw_map(game, game->height, game->width);
+	update_player_position(game, p, dx, dy);
 	return (0);
 }
-
-// int handle_keypress(int keycode, t_game *game)
-// {
-//     Position player_pos;
-//     player_pos = find_pos(game->map, game->height, game->width, 'P');
-//     if (player_pos.x == -1 || player_pos.y == -1) {
-//         return (0);
-//     }
-
-//     int moved = 0;
-//     if(keycode == XK_Left && game->map[player_pos.y][player_pos.x
-// 	- 1] == 'E')
-//     {
-//         free_game(game);
-//         handle_exit(NULL);
-//         return (0);
-//     }
-//     else if (keycode == XK_Right && game->map[player_pos.y][player_pos.x
-// 	+ 1] == 'E')
-//     {
-//         free_game(game);
-//         handle_exit(NULL);
-//         return (0);
-//     }
-//     else if (keycode == XK_Up && game->map[player_pos.y
-// 	- 1][player_pos.x] == 'E')
-//     {
-//         free_game(game);
-//         handle_exit(NULL);
-//         return (0);
-//     }
-//     else if (keycode == XK_Down && game->map[player_pos.y
-// 	+ 1][player_pos.x] == 'E')
-//     {
-//         free_game(game);
-//         handle_exit(NULL);
-//         return (0);
-//     }
-//     if(keycode == XK_Left && game->map[player_pos.y][player_pos.x
-// 	- 1] == 'C')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y][player_pos.x - 1] = 'P';
-//         moved = 1;
-//     }
-//     else if (keycode == XK_Right && game->map[player_pos.y][player_pos.x
-// 	+ 1] == 'C')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y][player_pos.x + 1] = 'P';
-//         moved = 1;
-//     }
-//     else if (keycode == XK_Up && game->map[player_pos.y
-// 	- 1][player_pos.x] == 'C')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y - 1][player_pos.x] = 'P';
-//         moved = 1;
-//     }
-//     else if (keycode == XK_Down && game->map[player_pos.y
-// 	+ 1][player_pos.x] == 'C')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y + 1][player_pos.x] = 'P';
-//         moved = 1;
-//     }
-//     if (keycode == XK_Left && game->map[player_pos.y][player_pos.x
-// 	- 1] != '1')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y][player_pos.x - 1] = 'P';
-//         moved = 1;
-//     }
-//     else if (keycode == XK_Right && game->map[player_pos.y][player_pos.x
-// 	+ 1] != '1')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y][player_pos.x + 1] = 'P';
-//         moved = 1;
-//     }
-//     else if (keycode == XK_Up && game->map[player_pos.y
-// 	- 1][player_pos.x] != '1')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y - 1][player_pos.x] = 'P';
-//         moved = 1;
-//     }
-//     else if (keycode == XK_Down && game->map[player_pos.y
-// 	+ 1][player_pos.x] != '1')
-//     {
-//         game->map[player_pos.y][player_pos.x] = '0';
-//         game->map[player_pos.y + 1][player_pos.x] = 'P';
-//         moved = 1;
-//     }
-//     if (keycode == XK_Escape)
-//     {
-//         free_game(game);
-//         handle_exit(NULL);
-//         return (0);
-//     }
-//     if (moved) {
-//         game->moves++;
-//         printf("Movements: %d\n", game->moves);
-//     }
-//     draw_map(game, map_height(game->map), ft_strlen(game->map[0]));
-//     return (0);
-// }

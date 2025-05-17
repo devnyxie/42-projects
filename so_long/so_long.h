@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 13:24:31 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/16 16:30:11 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:05:26 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,26 @@ typedef struct pos
 	int		y;
 }			t_pos;
 
-// map
+// map_utils -> map
 char		**get_map(char *str);
+
+// map_utils -> map_counts
+int			check_counts(char **map, int height, int width);
+
+// map_utils -> map_check_reach
+int			check_reach(char **map, int height, int width);
+
+// map_utils -> map_utils
+int			count_newlines(char *buf, int bytes_read, int *last_char_was_nl);
+int			count_lines_fd(char *filename);
+t_pos		find_pos(char **map, int height, int width, char c);
 
 // utils
 int			handle_exit(void *param);
 void		free_game(t_game *game);
 void		free_2d(char **arr);
 void		handle_error(const char *message, int exit_code);
-int			count_lines_fd(char *filename);
 int			map_height(char **map);
-t_pos		find_pos(char **map, int height, int width, char c);
 
 // movement
 int			handle_keypress(int keycode, t_game *game);

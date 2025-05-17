@@ -6,13 +6,13 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/16 14:34:46 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/17 12:03:28 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// MLX exit function
+// mlx exit function
 int	handle_exit(void *param)
 {
 	t_game	*game;
@@ -76,58 +76,4 @@ int	map_height(char **map)
 	while (map[i])
 		i++;
 	return (i);
-}
-
-int	count_lines_fd(char *filename)
-{
-	char	buf[64];
-	int		fd;
-	int		i;
-	int		j;
-	int		bytes_read;
-	int		last_char_was_nl;
-
-	i = 0;
-	last_char_was_nl = 1;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	while ((bytes_read = read(fd, buf, sizeof(buf))) > 0)
-	{
-		j = 0;
-		while (j < bytes_read)
-		{
-			if (buf[j] == '\n')
-			{
-				i++;
-				last_char_was_nl = 1;
-			}
-			else
-				last_char_was_nl = 0;
-			j++;
-		}
-	}
-	if (!last_char_was_nl)
-		i++;
-	close(fd);
-	return (i);
-}
-
-// @return (x,y)
-t_pos	find_pos(char **map, int height, int width, char letter)
-{
-	t_pos p;
-	p.y = 0;
-	while (p.y < height)
-	{
-		p.x = 0;
-		while (p.x < width)
-		{
-			if (map[p.y][p.x] == letter)
-				return (p);
-			p.x++;
-		}
-		p.y++;
-	}
-	return ((t_pos){-1, -1});
 }

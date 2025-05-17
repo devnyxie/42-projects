@@ -1,6 +1,6 @@
 NAME = so_long
 
-SRCS = so_long.c utils.c map.c movement.c mlx_utils.c
+SRCS = so_long.c utils.c ./map_utils/map.c ./map_utils/map_check_counts.c ./map_utils/map_check_reach.c ./map_utils/map_utils.c movement.c mlx_utils.c
 OBJS = $(SRCS:.c=.o)
 
 CC = gcc

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "get_next_line.h": "c",
-        "keysym.h": "c"
+        "keysym.h": "c",
+        "so_long.h": "c"
     }
 }
