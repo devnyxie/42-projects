@@ -6,24 +6,22 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/18 11:49:12 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:34:40 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	validate_file(char *path)
+void	val_file(char *path)
 {
 	size_t	len;
 
 	len = ft_strlen(path);
 	if (len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
 		handle_error("Invalid map file format. Expected .ber", 1);
-	if (access(path, F_OK) != 0)
-		handle_error(strerror(errno), 1);
 }
 
-int	val_map_v2(char **map, int height, t_game *game)
+int	val_map(char **map, int height, t_game *game)
 {
 	int	width;
 
@@ -68,7 +66,7 @@ char	**get_map(char *path, t_game *game)
 	int		result;
 	int		map_height;
 
-	validate_file(path);
+	val_file(path);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		handle_error(strerror(errno), 1);
@@ -77,7 +75,7 @@ char	**get_map(char *path, t_game *game)
 	if (!map)
 		handle_error("Malloc failed", 1);
 	parse_map(&map, fd);
-	result = val_map_v2(map, map_height, game);
+	result = val_map(map, map_height, game);
 	if (!result)
 	{
 		free_2d(map);
