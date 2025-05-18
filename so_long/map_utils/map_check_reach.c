@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 11:27:59 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 14:23:12 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:01:37 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ static void	dfs(char **map, int x, int y)
 	}
 }
 
-static void	check_exit_reachable(char **map_cp, t_pos exit)
+static void	check_exit_reachable(char **map_cp, char **map, t_pos exit)
 {
 	if (map_cp[exit.y][exit.x] != 'V')
 	{
 		free_2d(map_cp);
-		handle_error("Error: exit is unreachable", 1);
+		free_2d(map);
+		handle_error("Exit is unreachable", 1);
 	}
 }
 
@@ -80,9 +81,9 @@ static void	check_collectibles_reachable(char **map, char **map_cp, int height,
 		{
 			if (map[y][x] == 'C' && map_cp[y][x] != 'V')
 			{
+				free_2d(map);
 				free_2d(map_cp);
-				handle_error("Error: unreachable collectible(s)",
-					1);
+				handle_error("Unreachable collectible(s)", 1);
 			}
 			x++;
 		}
@@ -100,7 +101,7 @@ int	check_reach(char **map, int height, int width)
 	start_pos_loc = find_pos(map, height, width, 'P');
 	exit = find_pos(map, height, width, 'E');
 	dfs(map_cp, start_pos_loc.x, start_pos_loc.y);
-	check_exit_reachable(map_cp, exit);
+	check_exit_reachable(map_cp, map, exit);
 	check_collectibles_reachable(map, map_cp, height, width);
 	free_2d(map_cp);
 	return (1);

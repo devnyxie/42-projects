@@ -6,7 +6,7 @@
 /*   By: tafanasi <tafanasi@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:12:00 by tafanasi          #+#    #+#             */
-/*   Updated: 2025/05/17 14:28:41 by tafanasi         ###   ########.fr       */
+/*   Updated: 2025/05/18 11:49:12 by tafanasi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	validate_file(char *path)
 	if (len < 4 || ft_strncmp(path + len - 4, ".ber", 4) != 0)
 		handle_error("Invalid map file format. Expected .ber", 1);
 	if (access(path, F_OK) != 0)
-		handle_error("", 1);
+		handle_error(strerror(errno), 1);
 }
 
 int	val_map_v2(char **map, int height, t_game *game)
